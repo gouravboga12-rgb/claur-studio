@@ -15,7 +15,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="section-container relative z-10 w-full pt-28 pb-20 lg:pt-0 lg:pb-0">
+      <div className="section-container relative z-10 w-full pt-32 md:pt-40 lg:pt-48 pb-20">
         <div className="max-w-xl md:max-w-2xl lg:max-w-3xl">
           <div 
             className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent font-bold text-[9px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em] mb-6 md:mb-8"

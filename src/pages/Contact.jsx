@@ -2,7 +2,7 @@ import ContactContent from '../components/ContactContent'
 
 const Contact = () => {
   return (
-    <div className="pt-16 md:pt-20">
+    <div className="pt-24 md:pt-32">
       <section className="bg-text-dark text-white py-20 md:py-24 lg:py-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full opacity-[0.05] select-none pointer-events-none font-black text-[30vw] md:text-[20vw] leading-none uppercase text-right">
           Inquiry

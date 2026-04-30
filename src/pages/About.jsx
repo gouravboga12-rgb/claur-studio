@@ -3,7 +3,7 @@ import AboutContent from '../components/AboutContent'
 const About = () => {
 
   return (
-    <div className="pt-16 md:pt-20">
+    <div className="pt-24 md:pt-32">
       {/* Premium Header */}
       <section className="bg-secondary py-20 md:py-32 lg:py-48 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] select-none pointer-events-none font-black text-[40vw] md:text-[30vw] leading-none uppercase">
