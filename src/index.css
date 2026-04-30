@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+
+
+
+@theme {
+  --color-primary: #FFFFFF;
+  --color-secondary: #F5F5F5;
+  --color-accent: #C0A080;
+  --color-accent-dark: #A68A6D;
+  --color-accent-light: #D9C5B2;
+  --color-text-dark: #1A1A1A;
+  --color-text-muted: #666666;
+  
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+
+  --shadow-luxury: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  --shadow-luxury-hover: 0 20px 50px -12px rgba(192, 160, 128, 0.15);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  body {
+    @apply bg-white text-text-dark font-sans overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-text-dark;
+  }
+}
+
+@layer components {
+  .btn-premium {
+    @apply relative overflow-hidden px-8 py-4 bg-text-dark text-white rounded-full font-bold tracking-wider uppercase text-xs transition-all duration-500 hover:bg-accent hover:shadow-luxury-hover active:scale-95 flex items-center justify-center gap-3;
+  }
+  
+  .btn-accent {
+    @apply relative overflow-hidden px-8 py-4 bg-accent text-white rounded-full font-bold tracking-wider uppercase text-xs transition-all duration-500 hover:bg-accent-dark hover:shadow-luxury-hover active:scale-95 flex items-center justify-center gap-3;
+  }
+
+  .btn-outline {
+    @apply relative overflow-hidden px-8 py-4 border-2 border-accent text-accent rounded-full font-bold tracking-wider uppercase text-xs transition-all duration-500 hover:bg-accent hover:text-white active:scale-95 flex items-center justify-center gap-3;
+  }
+
+  .card-luxury {
+    @apply bg-white rounded-2xl overflow-hidden shadow-luxury transition-all duration-700 hover:shadow-luxury-hover hover:-translate-y-2 border border-gray-100;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .glass-effect {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-text-dark via-accent-dark to-accent;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes line-grow {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+.animate-line {
+  animation: line-grow 1.5s ease-out forwards;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-accent/30 rounded-full hover:bg-accent/60 transition-colors;
+}
+
+/* AOS Customizations */
+[data-aos] {
+  pointer-events: none;
+}
+.aos-animate {
+  pointer-events: auto;
+}
