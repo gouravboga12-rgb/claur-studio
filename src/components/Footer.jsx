@@ -7,20 +7,18 @@ import logo from '../assets/logo.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-text-dark text-white pt-32 pb-16 overflow-hidden relative">
+    <footer className="bg-text-dark text-white pt-20 md:pt-32 pb-12 md:pb-16 overflow-hidden relative">
       {/* Background Accent */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-accent/5 -skew-x-12 translate-x-1/2 pointer-events-none"></div>
 
       <div className="section-container relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-24 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 md:gap-16 lg:gap-24 mb-16 md:mb-32">
           {/* Brand & Mission */}
-          <div className="lg:col-span-5 space-y-12">
+          <div className="lg:col-span-5 space-y-8 md:space-y-12">
             <Link to="/" className="group inline-block">
-              <img src={logo} alt="Claur Studio" className="h-28 object-contain" />
+              <img src={logo} alt="Claur Studio" className="h-20 md:h-28 object-contain" />
             </Link>
 
-
-            
             <p className="text-gray-400 text-sm leading-relaxed max-w-md">
               We design modern, elegant, and space-efficient interiors that reflect the unique lifestyle of Hyderabad's elite.
             </p>
@@ -37,7 +35,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="lg:col-span-3">
-            <h3 className="text-xs font-bold uppercase tracking-[0.4em] text-accent mb-12">Navigation</h3>
+            <h3 className="text-xs font-bold uppercase tracking-[0.4em] text-accent mb-6 md:mb-12">Navigation</h3>
             <ul className="space-y-6">
               {['Home', 'About', 'Services', 'Projects', 'Estimate', 'Contact'].map((link) => (
                 <li key={link}>
@@ -54,8 +52,8 @@ const Footer = () => {
 
           {/* Contact Details */}
           <div className="lg:col-span-4">
-            <h3 className="text-xs font-bold uppercase tracking-[0.4em] text-accent mb-12">Inquiries</h3>
-            <div className="space-y-12">
+            <h3 className="text-xs font-bold uppercase tracking-[0.4em] text-accent mb-6 md:mb-12">Inquiries</h3>
+            <div className="space-y-8 md:space-y-12">
               <div className="group">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2">Speak to us</p>
                 <p className="text-lg font-black group-hover:text-accent transition-colors">+91 90328 93101</p>
