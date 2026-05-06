@@ -5,10 +5,10 @@
 
 @theme {
   --color-primary: #FFFFFF;
-  --color-secondary: #F5F5F5;
-  --color-accent: #C0A080;
-  --color-accent-dark: #A68A6D;
-  --color-accent-light: #D9C5B2;
+  --color-secondary: #F0EDE5;
+  --color-accent: #8B7355;
+  --color-accent-dark: #6D5A42;
+  --color-accent-light: #A88D6F;
   --color-text-dark: #1A1A1A;
   --color-text-muted: #666666;
   
@@ -16,7 +16,7 @@
   --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
 
   --shadow-luxury: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
-  --shadow-luxury-hover: 0 20px 50px -12px rgba(192, 160, 128, 0.15);
+  --shadow-luxury-hover: 0 20px 50px -12px rgba(139, 115, 85, 0.15);
 }
 
 @layer base {

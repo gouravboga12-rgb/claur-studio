@@ -17,9 +17,10 @@ const AboutContent = () => {
             <div className="relative group" data-aos="fade-right">
               <div className="absolute -inset-3 md:-inset-4 bg-accent/10 rounded-[2rem] md:rounded-[3rem] -rotate-2 md:-rotate-3 group-hover:rotate-0 transition-transform duration-700"></div>
               <img 
-                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80" 
+                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200" 
                 alt="Studio interior" 
                 className="relative rounded-[2rem] md:rounded-[2.5rem] shadow-2xl z-10 w-full h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px] object-cover"
+                loading="lazy"
               />
               <div className="absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 w-32 h-32 md:w-48 md:h-48 bg-accent rounded-full flex items-center justify-center text-white p-4 md:p-8 text-center font-bold text-xs md:text-sm z-20 shadow-2xl animate-float">
                 Est. 2024 Hyderabad

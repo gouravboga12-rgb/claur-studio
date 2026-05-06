@@ -38,7 +38,7 @@ const ContactCTA = () => {
               <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-8" data-aos="fade-right">Contact Us</h2>
               <h3 className="text-5xl md:text-7xl font-black leading-tight text-text-dark mb-12" data-aos="fade-right" data-aos-delay="100">
                 Let's Start Your <br />
-                <span className="text-accent italic font-light">Journey</span>.
+                <span className="text-accent">Journey</span>.
               </h3>
               <p className="text-text-muted text-sm leading-relaxed mb-16 max-w-md" data-aos="fade-right" data-aos-delay="200">
                 Experience the art of living. Schedule a private consultation with our principal designers today.

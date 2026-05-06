@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="absolute right-0 top-0 w-full lg:w-[60%] h-full z-0 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000")' }}
+          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1600")' }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 lg:via-white/20 to-transparent z-10"></div>
           <div className="absolute inset-0 bg-white/30 lg:bg-transparent"></div>
@@ -34,7 +34,7 @@ const Hero = () => {
             data-aos-delay="100"
           >
             We Design <br />
-            <span className="text-accent italic font-light">Dream</span> Spaces
+            <span className="text-accent">Dream</span> Spaces
           </h1>
           
           <p 

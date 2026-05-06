@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -8,15 +8,21 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 
-// Pages
-import Home from './pages/Home'
-import About from './pages/About'
-import Services from './pages/Services'
-import Projects from './pages/Projects'
-import Contact from './pages/Contact'
-import Estimate from './pages/Estimate'
-import EstimateForm from './pages/EstimateForm'
+// Pages (Lazy Loaded)
+const Home = lazy(() => import('./pages/Home'))
+const About = lazy(() => import('./pages/About'))
+const Services = lazy(() => import('./pages/Services'))
+const Projects = lazy(() => import('./pages/Projects'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Estimate = lazy(() => import('./pages/Estimate'))
+const EstimateForm = lazy(() => import('./pages/EstimateForm'))
 
+// Simple Loading Spinner Component
+const PageLoader = () => (
+  <div className="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
+    <div className="w-12 h-12 border-4 border-accent/20 border-t-accent rounded-full animate-spin"></div>
+  </div>
+)
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -42,16 +48,17 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/estimate" element={<Estimate />} />
-            <Route path="/estimate-form" element={<EstimateForm />} />
-          </Routes>
-
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/estimate" element={<Estimate />} />
+              <Route path="/estimate-form" element={<EstimateForm />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
         <WhatsAppButton />

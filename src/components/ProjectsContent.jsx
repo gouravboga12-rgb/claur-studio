@@ -33,12 +33,12 @@ const ProjectsContent = () => {
         })
       } else {
         projectList = [
-          { id: 1, title: 'Modern Minimalist Living', category: 'Living Room', image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200', description: 'A seamless blend of comfort and contemporary aesthetics.' },
+          { id: 1, title: 'Modern Minimalist Living', category: 'Living Room', image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800', description: 'A seamless blend of comfort and contemporary aesthetics.' },
           { id: 2, title: 'Culinary Masterpiece', category: 'Kitchen', image: '/kitchen-1.png', description: 'Functional luxury designed for the modern chef.' },
-          { id: 3, title: 'Imperial Suite', category: 'Bedroom', image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=1200', description: 'Restorative elegance with a touch of grandeur.' },
-          { id: 4, title: 'Zen Workspace', category: 'Office', image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=1200', description: 'Promoting focus through thoughtful spatial design.' },
-          { id: 5, title: 'Sophisticated Lounge', category: 'Living Room', image: 'https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&q=80&w=1600', description: 'Refined social spaces for unforgettable moments.' },
-          { id: 6, title: 'Urban Bistro Kitchen', category: 'Kitchen', image: 'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&q=80&w=1200', description: 'Maximizing style in a compact, efficient layout.' },
+          { id: 3, title: 'Imperial Suite', category: 'Bedroom', image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=800', description: 'Restorative elegance with a touch of grandeur.' },
+          { id: 4, title: 'Zen Workspace', category: 'Office', image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=800', description: 'Promoting focus through thoughtful spatial design.' },
+          { id: 5, title: 'Sophisticated Lounge', category: 'Living Room', image: 'https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&q=80&w=800', description: 'Refined social spaces for unforgettable moments.' },
+          { id: 6, title: 'Urban Bistro Kitchen', category: 'Kitchen', image: 'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&q=80&w=800', description: 'Maximizing style in a compact, efficient layout.' },
         ]
       }
       setProjects(projectList)
@@ -59,7 +59,7 @@ const ProjectsContent = () => {
           <div className="text-center mb-16">
             <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-up">Our Portfolio</h2>
             <h3 className="text-5xl md:text-7xl font-black mb-8 tracking-tight text-text-dark" data-aos="fade-up" data-aos-delay="100">
-              Curation of <span className="text-accent italic font-light">Art</span>.
+              Curation of <span className="text-accent">Art</span>.
             </h3>
             <p className="text-text-muted text-sm leading-relaxed max-w-2xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="200">
               A curated showcase of our most ambitious projects, where architectural precision meets human emotion.

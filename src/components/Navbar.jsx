@@ -75,7 +75,7 @@ const Navbar = () => {
             style={{
               fontSize: '1.75rem',
               fontWeight: 900,
-              color: location.pathname === link.path ? '#C0A080' : '#1A1A1A',
+              color: location.pathname === link.path ? '#8B7355' : '#1A1A1A',
               textDecoration: 'none',
               letterSpacing: '-0.02em',
               lineHeight: 1.2,
@@ -104,7 +104,7 @@ const Navbar = () => {
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.5rem',
-            backgroundColor: '#C0A080',
+            backgroundColor: '#8B7355',
             color: '#ffffff',
             borderRadius: '9999px',
             padding: '1rem 2rem',

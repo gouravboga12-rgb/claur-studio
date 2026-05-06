@@ -9,7 +9,7 @@ const ProjectsPreview = () => {
     {
       title: "The Minimalist Loft",
       category: "Living Room",
-      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200",
+      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800",
       size: "large"
     },
     {
@@ -21,19 +21,19 @@ const ProjectsPreview = () => {
     {
       title: "Velvet Suite",
       category: "Bedroom",
-      image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=1200",
+      image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=800",
       size: "small"
     },
     {
       title: "The Royal Ensuite",
       category: "Bath",
-      image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80&w=1200",
+      image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80&w=800",
       size: "large"
     },
     {
       title: "Corporate Zen",
       category: "Office",
-      image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=1200",
+      image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=800",
       size: "medium"
     }
   ]
@@ -46,7 +46,7 @@ const ProjectsPreview = () => {
             <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-right">Curated Works</h2>
             <h3 className="text-4xl md:text-6xl font-black leading-tight text-text-dark" data-aos="fade-right" data-aos-delay="100">
               Selected <br />
-              <span className="text-accent italic font-light">Portfolios</span>.
+              <span className="text-accent">Portfolios</span>.
             </h3>
           </div>
           <Link 
@@ -79,6 +79,7 @@ const ProjectsPreview = () => {
                   src={project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-text-dark/90 via-text-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
                 

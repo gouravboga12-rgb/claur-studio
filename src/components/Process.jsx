@@ -43,7 +43,7 @@ const Process = () => {
             <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-right">The Journey</h2>
             <h3 className="text-4xl md:text-6xl font-black leading-tight" data-aos="fade-right" data-aos-delay="100">
               How We Create <br />
-              Your <span className="text-accent italic font-light">Legacy</span>.
+              Your <span className="text-accent">Legacy</span>.
             </h3>
           </div>
           <div className="text-gray-400 max-w-sm text-sm" data-aos="fade-left">

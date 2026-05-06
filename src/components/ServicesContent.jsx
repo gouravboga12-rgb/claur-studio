@@ -30,10 +30,10 @@ const ServicesContent = () => {
         setServices(data)
       } else {
         setServices([
-          { id: 1, name: 'Residential Interiors', description: 'Complete bespoke home design solutions.', space_type: '2BHK', package: 'Standard', style: 'Modern', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200' },
-          { id: 2, name: 'Luxury Villa Suite', description: 'Premium interior architecture for grand villas.', space_type: 'Villa', package: 'Premium', style: 'Luxury', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200' },
-          { id: 3, name: 'Executive Office', description: 'Inspiring and functional corporate environments.', space_type: 'Office', package: 'Standard', style: 'Minimal', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200' },
-          { id: 4, name: 'Gourmet Kitchen', description: 'State-of-the-art modular kitchen systems.', space_type: 'All', package: 'Basic', style: 'Modern', image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1200' },
+          { id: 1, name: 'Residential Interiors', description: 'Complete bespoke home design solutions.', space_type: '2BHK', package: 'Standard', style: 'Modern', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800' },
+          { id: 2, name: 'Luxury Villa Suite', description: 'Premium interior architecture for grand villas.', space_type: 'Villa', package: 'Premium', style: 'Luxury', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800' },
+          { id: 3, name: 'Executive Office', description: 'Inspiring and functional corporate environments.', space_type: 'Office', package: 'Standard', style: 'Minimal', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800' },
+          { id: 4, name: 'Gourmet Kitchen', description: 'State-of-the-art modular kitchen systems.', space_type: 'All', package: 'Basic', style: 'Modern', image: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800' },
         ])
       }
     } catch (error) {
@@ -56,7 +56,7 @@ const ServicesContent = () => {
         <div className="text-center mb-20">
           <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-up">Our Offerings</h2>
           <h3 className="text-5xl md:text-7xl font-black tracking-tight text-text-dark" data-aos="fade-up" data-aos-delay="100">
-            Tailored <span className="text-accent italic font-light">Solutions</span>.
+            Tailored <span className="text-accent">Solutions</span>.
           </h3>
           <p className="text-text-muted text-sm leading-relaxed max-w-2xl mx-auto mt-6" data-aos="fade-up" data-aos-delay="200">
             From initial sketches to final execution, we offer comprehensive design solutions that harmonize luxury with everyday functionality.
@@ -99,7 +99,8 @@ const ServicesContent = () => {
                   className="group relative h-[380px] md:h-[600px] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-text-dark"
                   data-aos="fade-up" data-aos-delay={index * 100}>
                   <img src={service.image} alt={service.name} 
-                    className="w-full h-full object-cover opacity-60 transition-transform duration-[2000ms] group-hover:scale-110 group-hover:opacity-40" />
+                    className="w-full h-full object-cover opacity-60 transition-transform duration-[2000ms] group-hover:scale-110 group-hover:opacity-40"
+                    loading="lazy" />
                   <div className="absolute top-5 left-5 md:top-8 md:left-8 bg-accent px-4 py-1.5 md:px-6 md:py-2 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white shadow-xl">
                     {service.package}
                   </div>

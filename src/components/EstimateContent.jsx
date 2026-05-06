@@ -9,7 +9,7 @@ const EstimateContent = () => {
       <div className="section-container relative z-10 text-center">
         <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-4" data-aos="fade-up">Get an Estimate</h2>
         <h3 className="text-3xl sm:text-4xl md:text-6xl font-black text-text-dark mb-4 md:mb-6" data-aos="fade-up" data-aos-delay="50">
-          Plan your <span className="text-accent italic font-light">dream home</span>
+          Plan your <span className="text-accent">dream home</span>
         </h3>
         <p className="text-text-muted text-sm md:text-base mb-12 md:mb-20" data-aos="fade-up" data-aos-delay="100">
           Calculate the approximate cost of doing up your interiors

@@ -6,19 +6,19 @@ const ServicesPreview = () => {
     {
       title: "Residential Interiors",
       desc: "Transforming private residences into personalized sanctuaries of style and comfort.",
-      image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1200",
+      image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800",
       category: "Home"
     },
     {
       title: "Commercial Spaces",
       desc: "Strategic design solutions for high-performance offices and retail environments.",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
       category: "Work"
     },
     {
       title: "Architectural Planning",
       desc: "Precise 2D/3D layouts that serve as the blueprint for your dream environment.",
-      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=2000",
+      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1200",
       category: "Plan"
     }
 
@@ -33,7 +33,7 @@ const ServicesPreview = () => {
             <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-right">Our Expertise</h2>
             <h3 className="text-4xl md:text-6xl font-black leading-tight text-text-dark" data-aos="fade-right" data-aos-delay="100">
               Solutions for Every <br />
-              <span className="italic font-light">Dimension</span>.
+              <span>Dimension</span>.
             </h3>
           </div>
           <Link 
@@ -60,6 +60,7 @@ const ServicesPreview = () => {
                 src={service.image} 
                 alt={service.title} 
                 className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
 
