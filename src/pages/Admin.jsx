@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Plus, Edit2, Trash2, Layout, Briefcase, LogOut, Image as ImageIcon, Save, X, Lock, Inbox, User, Phone, Mail, Calendar } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
