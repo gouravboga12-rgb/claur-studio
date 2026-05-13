@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 import { Menu, X, ArrowRight } from 'lucide-react'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo_premium.png'
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -56,7 +56,7 @@ const Navbar = () => {
     >
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-        <img src={logo} alt="Claur Studio" style={{ height: '64px' }} />
+        <img src={logo} alt="Claur Studio" style={{ height: '100px' }} />
         <button
           onClick={() => setIsMobileMenuOpen(false)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
@@ -135,7 +135,7 @@ const Navbar = () => {
         <div className="section-container flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3 shrink-0 mr-12">
-            <img src={logo} alt="Claur Studio" className="h-14 md:h-20 transition-all duration-500" />
+            <img src={logo} alt="Claur Studio" className="h-20 md:h-28 transition-all duration-500" />
           </Link>
 
           {/* Desktop Links */}

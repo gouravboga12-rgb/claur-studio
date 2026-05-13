@@ -20,6 +20,7 @@ const Hero = () => {
           <div 
             className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent font-bold text-[9px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em] mb-6 md:mb-8"
             data-aos="fade-right"
+            data-aos-delay="100"
           >
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -29,27 +30,46 @@ const Hero = () => {
           </div>
 
           <h1 
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[90px] xl:text-[100px] font-black mb-6 md:mb-8 leading-[0.9] text-text-dark"
-            data-aos="fade-right"
-            data-aos-delay="100"
+            className="text-5xl sm:text-6xl md:text-8xl lg:text-[100px] xl:text-[120px] font-black mb-8 md:mb-12 leading-[0.85] tracking-tighter text-text-dark"
           >
-            We Design <br />
-            <span className="text-accent">Dream</span> Spaces
+            <span 
+              className="block text-xl md:text-2xl font-bold uppercase tracking-[0.5em] text-accent mb-4"
+              data-aos="fade-down"
+              data-aos-delay="200"
+            >
+              Designing
+            </span>
+            <div className="flex flex-col">
+              <span 
+                className="text-gradient"
+                data-aos="fade-right"
+                data-aos-delay="400"
+              >
+                Timeless
+              </span>
+              <span 
+                className="relative inline-block"
+                data-aos="fade-right"
+                data-aos-delay="600"
+              >
+                Interiors
+                <span className="absolute -bottom-2 left-0 w-1/3 h-2 bg-accent/20 rounded-full"></span>
+              </span>
+            </div>
           </h1>
           
           <p 
-            className="text-sm md:text-base mb-8 md:mb-12 max-w-sm md:max-w-xl text-text-muted leading-relaxed"
+            className="text-base md:text-lg mb-10 md:mb-14 max-w-sm md:max-w-2xl text-text-muted leading-relaxed"
             data-aos="fade-right"
-            data-aos-delay="200"
+            data-aos-delay="800"
           >
-            Modern, functional, and elegant interiors tailored to your unique lifestyle. 
-            Transforming Hyderabad's finest homes into architectural masterpieces.
+            Luxury interior design studio in Hyderabad crafting elegant, functional, and deeply personal spaces.
           </p>
 
           <div 
             className="flex flex-wrap items-center gap-4 md:gap-6 mb-12 md:mb-20"
             data-aos="fade-right"
-            data-aos-delay="300"
+            data-aos-delay="1000"
           >
             <Link to="/estimate" className="btn-accent px-7 py-4 md:px-10 md:py-5 group shadow-2xl text-xs">
               <span>Get Free Estimate</span>
@@ -67,21 +87,21 @@ const Hero = () => {
           <div 
             className="flex flex-wrap items-center gap-6 md:gap-12"
             data-aos="fade-up"
-            data-aos-delay="500"
+            data-aos-delay="1200"
           >
             <div className="flex flex-col gap-1">
               <span className="text-3xl md:text-4xl font-black text-text-dark">50+</span>
-              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Projects Delivered</span>
+              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Spaces Designed</span>
             </div>
             <div className="w-px h-10 md:h-12 bg-gray-200 hidden sm:block"></div>
             <div className="flex flex-col gap-1">
-              <span className="text-3xl md:text-4xl font-black text-text-dark">10+</span>
-              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Design Awards</span>
+              <span className="text-3xl md:text-4xl font-black text-text-dark">3+</span>
+              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Years Experience</span>
             </div>
             <div className="w-px h-10 md:h-12 bg-gray-200 hidden sm:block"></div>
             <div className="flex flex-col gap-1">
-              <span className="text-3xl md:text-4xl font-black text-text-dark">100%</span>
-              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Happy Clients</span>
+              <span className="text-3xl md:text-4xl font-black text-text-dark text-gradient">Full</span>
+              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-accent">End-to-End Execution</span>
             </div>
           </div>
         </div>

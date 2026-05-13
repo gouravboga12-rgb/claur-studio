@@ -32,19 +32,16 @@ const AboutContent = () => {
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-text-dark">Karan Dadga & Mounica</h3>
               <div className="w-16 md:w-20 h-1 bg-accent"></div>
               <p className="text-text-muted text-sm md:text-base leading-relaxed">
-                Claur Studio is the culmination of a shared vision to bring world-class interior design to Hyderabad. We believe that every space has a soul, and our mission is to reveal it through sophisticated design and flawless execution.
-              </p>
-              <p className="text-text-muted text-sm leading-relaxed">
-                Specializing in high-end residential and commercial projects, our approach is deeply personal, ensuring that every detail reflects the unique character and aspirations of our clients.
+                Claur Studio brings world-class interior design to Hyderabad, crafting sophisticated, soul-filled spaces through flawless execution and a deeply personal approach that reflects each client's unique aspirations.
               </p>
               <div className="grid grid-cols-2 gap-8 md:gap-12 pt-6 md:pt-10 border-t border-gray-100">
                 <div>
                   <h4 className="text-text-dark text-3xl md:text-4xl font-black mb-1">50+</h4>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Projects Done</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Spaces Designed</p>
                 </div>
                 <div>
-                  <h4 className="text-text-dark text-3xl md:text-4xl font-black mb-1">12+</h4>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Expert Artisans</p>
+                  <h4 className="text-text-dark text-3xl md:text-4xl font-black mb-1">3+</h4>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Years Experience</p>
                 </div>
               </div>
             </div>

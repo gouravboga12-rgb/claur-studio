@@ -1,4 +1,8 @@
 import AboutContent from '../components/AboutContent'
+import WhyChooseUs from '../components/WhyChooseUs'
+import Process from '../components/Process'
+import FeaturedProjects from '../components/FeaturedProjects'
+import Testimonials from '../components/Testimonials'
 
 const About = () => {
 
@@ -22,6 +26,14 @@ const About = () => {
       </section>
 
       <AboutContent />
+
+      <WhyChooseUs />
+
+      <Process />
+
+      <FeaturedProjects />
+
+      <Testimonials />
     </div>
   )
 }
