@@ -24,8 +24,33 @@ const Footer = () => {
             </p>
 
 
-            <div className="flex gap-4">
-              <span className="text-gray-500 text-[10px] uppercase tracking-widest">Follow us on Social Media</span>
+            <div className="flex flex-col gap-6">
+              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.4em]">Connect With Us</span>
+              <div className="flex gap-4">
+                <a 
+                  href="https://www.instagram.com/claur.studio?igsh=MTB1aXI4OTZmYnZtMQ==" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-500 group relative overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="22" height="22" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="relative z-10 group-hover:scale-110 transition-transform duration-500"
+                  >
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                  </svg>
+                </a>
+              </div>
             </div>
 
 
@@ -65,7 +90,7 @@ const Footer = () => {
               <div className="group">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2">Location</p>
                 <p className="text-sm font-bold leading-relaxed max-w-[250px]">
-                  Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074
+                  Service Rd, Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074
                 </p>
               </div>
 

@@ -95,7 +95,7 @@ const Hero = () => {
             </div>
             <div className="w-px h-10 md:h-12 bg-gray-200 hidden sm:block"></div>
             <div className="flex flex-col gap-1">
-              <span className="text-3xl md:text-4xl font-black text-text-dark">3+</span>
+              <span className="text-3xl md:text-4xl font-black text-text-dark">+6</span>
               <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Years Experience</span>
             </div>
             <div className="w-px h-10 md:h-12 bg-gray-200 hidden sm:block"></div>

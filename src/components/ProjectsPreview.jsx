@@ -81,13 +81,13 @@ const ProjectsPreview = () => {
                   className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-text-dark/90 via-text-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
                 
                 <div className="absolute inset-0 p-12 flex flex-col justify-end opacity-0 group-hover:opacity-100 translate-y-8 group-hover:translate-y-0 transition-all duration-700">
-                  <span className="text-accent font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">{project.category}</span>
+                  <span className="text-accent font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block drop-shadow-sm">{project.category}</span>
                   <div className="flex justify-between items-center">
-                    <h4 className="text-white text-3xl font-black">{project.title}</h4>
-                    <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white transform scale-0 group-hover:scale-100 transition-transform duration-500 delay-100">
+                    <h4 className="text-white text-3xl font-black drop-shadow-md">{project.title}</h4>
+                    <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-white transform scale-0 group-hover:scale-100 transition-transform duration-500 delay-100 shadow-xl">
                       <ArrowUpRight size={24} />
                     </div>
                   </div>

@@ -39,10 +39,10 @@ const FeaturedProjects = () => {
                 alt={project.title} 
                 className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-              <div className="absolute inset-0 p-10 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <span className="text-accent font-bold uppercase tracking-[0.4em] text-[10px] mb-2">{project.category}</span>
-                <h4 className="text-2xl md:text-3xl font-black">{project.title}</h4>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 p-10 flex flex-col justify-end transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <span className="text-accent font-bold uppercase tracking-[0.4em] text-[10px] mb-3 drop-shadow-sm">{project.category}</span>
+                <h4 className="text-white text-2xl md:text-3xl font-black drop-shadow-md">{project.title}</h4>
               </div>
             </Link>
           ))}

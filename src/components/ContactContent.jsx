@@ -39,7 +39,7 @@ const ContactContent = () => {
                 {[
                   { icon: <Phone size={22} />, label: 'Speak to us', value: '+91 90328 93101' },
                   { icon: <Mail size={22} />, label: 'Inquiry Email', value: 'claurstudio@gmail.com', breakAll: true },
-                  { icon: <MapPin size={22} />, label: 'Our Studio', value: 'Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074' },
+                  { icon: <MapPin size={22} />, label: 'Our Studio', value: 'Service Rd, Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074' },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-5 md:gap-6 group" data-aos="fade-right" data-aos-delay={200 + i * 100}>
                     <div className="w-12 h-12 md:w-14 md:h-14 bg-secondary rounded-xl md:rounded-2xl flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-white transition-all duration-500">
@@ -127,7 +127,7 @@ const ContactContent = () => {
         <div className="section-container">
           <div className="h-[280px] sm:h-[350px] md:h-[400px] w-full rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-luxury border border-gray-100" data-aos="zoom-in">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.683050013063!2d78.54763197593674!3d17.331005883547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9f78326e0339%3A0x6335131b790119e7!2sL.%20B.%20Nagar%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1714460000000!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.386121434316!2d78.55102727493375!3d17.3451462039912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99fc88cd9c0f%3A0x7023e82bd3c03bc0!2sClaur%20Studio!5e0!3m2!1sen!2sin!4v1747147774771!5m2!1sen!2sin" 
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
               referrerPolicy="no-referrer-when-downgrade" title="Claur Studio Location"
             ></iframe>

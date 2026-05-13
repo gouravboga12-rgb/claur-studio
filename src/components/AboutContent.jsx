@@ -17,8 +17,8 @@ const AboutContent = () => {
             <div className="relative group" data-aos="fade-right">
               <div className="absolute -inset-3 md:-inset-4 bg-accent/10 rounded-[2rem] md:rounded-[3rem] -rotate-2 md:-rotate-3 group-hover:rotate-0 transition-transform duration-700"></div>
               <img 
-                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200" 
-                alt="Studio interior" 
+                src="/visionaries.png" 
+                alt="Karan Dadga & Mounica - Claur Studio Visionaries" 
                 className="relative rounded-[2rem] md:rounded-[2.5rem] shadow-2xl z-10 w-full h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px] object-cover"
                 loading="lazy"
               />
@@ -30,6 +30,7 @@ const AboutContent = () => {
             <div className="space-y-6 md:space-y-10" data-aos="fade-left">
               <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold">The Visionaries</h2>
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-text-dark">Karan Dadga & Mounica</h3>
+              <p className="text-accent font-bold tracking-[0.2em] text-xs md:text-sm uppercase mt-2">Founders | Interior Designers</p>
               <div className="w-16 md:w-20 h-1 bg-accent"></div>
               <p className="text-text-muted text-sm md:text-base leading-relaxed">
                 Claur Studio brings world-class interior design to Hyderabad, crafting sophisticated, soul-filled spaces through flawless execution and a deeply personal approach that reflects each client's unique aspirations.
@@ -40,7 +41,7 @@ const AboutContent = () => {
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Spaces Designed</p>
                 </div>
                 <div>
-                  <h4 className="text-text-dark text-3xl md:text-4xl font-black mb-1">3+</h4>
+                  <h4 className="text-text-dark text-3xl md:text-4xl font-black mb-1">+6</h4>
                   <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">Years Experience</p>
                 </div>
               </div>
