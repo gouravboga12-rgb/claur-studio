@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, Maximize2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Maximize2, X } from 'lucide-react'
 import { useState, useMemo, useEffect } from 'react'
 import { projectsData, siteProjectsData } from '../data/projectsData'
 
@@ -201,7 +201,7 @@ const ProjectDetail = () => {
               className="w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-accent transition-all border border-white/10" 
               onClick={() => setSelectedImage(null)}
             >
-              <Maximize2 size={24} className="rotate-45" />
+              <X size={24} />
             </button>
           </div>
 
