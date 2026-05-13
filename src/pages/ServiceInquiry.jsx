@@ -1,0 +1,180 @@
+import { useParams, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { ArrowLeft, Send, CheckCircle } from 'lucide-react'
+import { servicesData } from '../data/servicesData'
+
+const ServiceInquiry = () => {
+  const { serviceId } = useParams()
+  const service = servicesData.find(s => s.id === parseInt(serviceId))
+  const [submitted, setSubmitted] = useState(false)
+  const [formData, setFormData] = useState({})
+
+  if (!service) {
+    return (
+      <div className="pt-32 pb-20 text-center">
+        <h1 className="text-4xl font-black mb-8">Service Not Found</h1>
+        <Link to="/services" className="text-accent font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+          <ArrowLeft size={16} /> Back to Services
+        </Link>
+      </div>
+    )
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target
+    if (type === 'checkbox') {
+      const currentValues = formData[name] || []
+      if (checked) {
+        setFormData({ ...formData, [name]: [...currentValues, value] })
+      } else {
+        setFormData({ ...formData, [name]: currentValues.filter(v => v !== value) })
+      }
+    } else {
+      setFormData({ ...formData, [name]: value })
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('Inquiry Submitted:', { service: service.name, ...formData })
+    setSubmitted(true)
+    window.scrollTo(0, 0)
+  }
+
+  return (
+    <div className="pt-24 md:pt-32 min-h-screen bg-secondary/30">
+      <div className="section-container py-12 md:py-20">
+        <Link 
+          to="/services" 
+          className="flex items-center gap-2 mb-12 text-accent font-bold uppercase tracking-widest text-xs hover:gap-4 transition-all w-fit"
+        >
+          <ArrowLeft size={16} /> Back to Services
+        </Link>
+
+        {submitted ? (
+          <div className="max-w-2xl mx-auto bg-white p-12 md:p-20 rounded-[3rem] shadow-luxury text-center" data-aos="zoom-in">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 text-green-600">
+              <CheckCircle size={40} />
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black mb-6">Thank You!</h2>
+            <p className="text-text-muted mb-12 leading-relaxed">
+              We've received your inquiry for <strong>{service.name}</strong>. Our design consultant will reach out to you within 24 hours to discuss your project in detail.
+            </p>
+            <Link to="/services" className="btn-accent inline-block">Explore Other Services</Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-start">
+            <div data-aos="fade-right">
+              <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6">Inquiry Form</h2>
+              <h1 className="text-4xl md:text-6xl font-black mb-8 tracking-tight text-text-dark leading-tight">
+                Tell us about your <span className="text-accent">{service.name}</span> project.
+              </h1>
+              <p className="text-text-muted text-lg mb-12 leading-relaxed">
+                Fill out the details below so we can prepare a personalized design consultation for you.
+              </p>
+
+              <div className="relative h-[300px] md:h-[400px] rounded-[2.5rem] overflow-hidden group">
+                <img src={service.image} alt={service.name} className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <span className="text-accent text-[10px] font-bold uppercase tracking-[0.4em] mb-2 block">{service.package}</span>
+                  <h3 className="text-white text-2xl font-black">{service.name}</h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-luxury border border-gray-100" data-aos="fade-left">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                {/* Standard Fields */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Full Name</label>
+                    <input 
+                      type="text" required name="fullName" onChange={handleInputChange}
+                      className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Email Address</label>
+                    <input 
+                      type="email" required name="email" onChange={handleInputChange}
+                      className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Phone Number</label>
+                  <input 
+                    type="tel" required name="phone" onChange={handleInputChange}
+                    className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all"
+                    placeholder="+91 98765 43210"
+                  />
+                </div>
+
+                <div className="w-full h-px bg-gray-100 my-8"></div>
+
+                {/* Dynamic Service Specific Fields */}
+                {service.formFields.map((field) => (
+                  <div key={field.name} className="space-y-4">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{field.label}</label>
+                    
+                    {field.type === 'select' && (
+                      <select 
+                        name={field.name} required onChange={handleInputChange}
+                        className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all appearance-none cursor-pointer"
+                      >
+                        <option value="">Select an option</option>
+                        {field.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                      </select>
+                    )}
+
+                    {field.type === 'number' && (
+                      <input 
+                        type="number" name={field.name} required onChange={handleInputChange}
+                        className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all"
+                        placeholder="Enter value"
+                      />
+                    )}
+
+                    {field.type === 'checkbox' && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+                        {field.options.map(opt => (
+                          <label key={opt} className="flex items-center gap-3 cursor-pointer group">
+                            <input 
+                              type="checkbox" name={field.name} value={opt} onChange={handleInputChange}
+                              className="w-5 h-5 rounded border-none bg-secondary text-accent focus:ring-accent cursor-pointer"
+                            />
+                            <span className="text-sm text-gray-600 group-hover:text-text-dark transition-colors">{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Additional Message</label>
+                  <textarea 
+                    name="message" rows="4" onChange={handleInputChange}
+                    className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all resize-none"
+                    placeholder="Tell us more about your vision..."
+                  ></textarea>
+                </div>
+
+                <button type="submit" className="w-full btn-accent flex items-center justify-center gap-4 group py-5">
+                  <span>Send Inquiry</span>
+                  <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default ServiceInquiry

@@ -17,6 +17,7 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Estimate = lazy(() => import('./pages/Estimate'))
 const EstimateForm = lazy(() => import('./pages/EstimateForm'))
+const ServiceInquiry = lazy(() => import('./pages/ServiceInquiry'))
 
 // Simple Loading Spinner Component
 const PageLoader = () => (
@@ -59,6 +60,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/estimate" element={<Estimate />} />
               <Route path="/estimate-form" element={<EstimateForm />} />
+              <Route path="/services/:serviceId/inquiry" element={<ServiceInquiry />} />
             </Routes>
           </Suspense>
         </main>
