@@ -16,7 +16,7 @@ const Footer = () => {
           {/* Brand & Mission */}
           <div className="lg:col-span-5 space-y-8 md:space-y-12">
             <Link to="/" className="group inline-block">
-              <img src={logo} alt="Claur Studio" className="h-16 md:h-32 object-contain" />
+              <img src={logo} alt="Claur Studio" className="h-24 md:h-32 object-contain" />
             </Link>
 
             <p className="text-gray-400 text-sm leading-relaxed max-w-md">

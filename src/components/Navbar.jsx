@@ -56,7 +56,7 @@ const Navbar = () => {
     >
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-        <img src={logo} alt="Claur Studio" style={{ height: '80px' }} />
+        <img src={logo} alt="Claur Studio" style={{ height: '100px' }} />
         <button
           onClick={() => setIsMobileMenuOpen(false)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
@@ -135,7 +135,7 @@ const Navbar = () => {
         <div className="section-container flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3 shrink-0 md:mr-12">
-            <img src={logo} alt="Claur Studio" className="h-16 md:h-32 transition-all duration-500" />
+            <img src={logo} alt="Claur Studio" className="h-24 md:h-32 transition-all duration-500" />
           </Link>
 
           {/* Desktop Links */}
@@ -157,7 +157,7 @@ const Navbar = () => {
 
             <Link
               to="/contact"
-              className="px-6 py-3.5 rounded-full font-bold uppercase tracking-widest text-[9px] flex items-center gap-3 transition-all duration-500 shadow-xl border-2 bg-text-dark text-white border-text-dark hover:bg-accent hover:border-accent"
+              className="px-6 py-3.5 rounded-full font-bold uppercase tracking-widest text-[9px] flex items-center gap-3 transition-all duration-500 shadow-xl border-2 bg-text-dark text-white border-text-dark hover:bg-accent hover:border-accent whitespace-nowrap"
             >
               <span>Get Free Quote | +91 90328 93101</span>
               <ArrowRight size={12} />

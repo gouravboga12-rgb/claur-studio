@@ -46,7 +46,7 @@ const Testimonials = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h2 className="text-accent uppercase tracking-[0.4em] text-[10px] font-bold mb-4">Testimonials</h2>
-            <h3 className="text-3xl md:text-5xl font-black">Trusted by homeowners</h3>
+            <h3 className="text-3xl md:text-5xl font-black">What Our Client Says</h3>
           </div>
           <p className="text-gray-500 text-xs uppercase tracking-widest max-w-[200px]">
             Hover to pause and read reviews
