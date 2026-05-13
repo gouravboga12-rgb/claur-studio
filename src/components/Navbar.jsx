@@ -56,7 +56,7 @@ const Navbar = () => {
     >
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-        <img src={logo} alt="Claur Studio" style={{ height: '100px' }} />
+        <img src={logo} alt="Claur Studio" style={{ height: '120px' }} />
         <button
           onClick={() => setIsMobileMenuOpen(false)}
           style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}
@@ -135,7 +135,7 @@ const Navbar = () => {
         <div className="section-container flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-3 shrink-0 mr-12">
-            <img src={logo} alt="Claur Studio" className="h-20 md:h-28 transition-all duration-500" />
+            <img src={logo} alt="Claur Studio" className="h-24 md:h-32 transition-all duration-500" />
           </Link>
 
           {/* Desktop Links */}
