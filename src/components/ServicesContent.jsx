@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
-import { servicesData } from '../data/servicesData'
+import { useData } from '../hooks/useData'
 
 const ServicesContent = () => {
-  const [services, setServices] = useState(servicesData)
-  const [loading, setLoading] = useState(false)
+  const { services, loading } = useData()
 
   return (
     <section className="section-padding bg-white">

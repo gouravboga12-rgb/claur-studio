@@ -34,11 +34,29 @@ const ServiceInquiry = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Inquiry Submitted:', { service: service.name, ...formData })
-    setSubmitted(true)
-    window.scrollTo(0, 0)
+    try {
+      const { error } = await supabase
+        .from('enquiries')
+        .insert([{
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          message: `[SERVICE INQUIRY: ${service.name}]\n` + 
+                   Object.entries(formData)
+                     .filter(([key]) => !['fullName', 'email', 'phone'].includes(key))
+                     .map(([key, val]) => `${key}: ${Array.isArray(val) ? val.join(', ') : val}`)
+                     .join('\n')
+        }])
+      
+      if (error) throw error
+      setSubmitted(true)
+      window.scrollTo(0, 0)
+    } catch (err) {
+      console.error('Error submitting inquiry:', err)
+      alert('There was an error submitting your inquiry. Please try again.')
+    }
   }
 
   return (
