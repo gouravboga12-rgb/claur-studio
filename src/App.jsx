@@ -18,6 +18,7 @@ const Contact = lazy(() => import('./pages/Contact'))
 const Estimate = lazy(() => import('./pages/Estimate'))
 const EstimateForm = lazy(() => import('./pages/EstimateForm'))
 const ServiceInquiry = lazy(() => import('./pages/ServiceInquiry'))
+const Admin = lazy(() => import('./pages/Admin'))
 
 // Simple Loading Spinner Component
 const PageLoader = () => (
@@ -35,7 +36,10 @@ const ScrollToTop = () => {
   return null
 }
 
-function App() {
+function AppContent() {
+  const location = useLocation()
+  const isAdmin = location.pathname.startsWith('/admin')
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -45,28 +49,35 @@ function App() {
   }, [])
 
   return (
+    <div className="flex flex-col min-h-screen overflow-x-hidden">
+      {!isAdmin && <Navbar />}
+      <main className="flex-grow">
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/estimate" element={<Estimate />} />
+            <Route path="/estimate-form" element={<EstimateForm />} />
+            <Route path="/services/:serviceId/inquiry" element={<ServiceInquiry />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </Suspense>
+      </main>
+      {!isAdmin && <Footer />}
+      {!isAdmin && <WhatsAppButton />}
+    </div>
+  )
+}
+
+function App() {
+  return (
     <Router>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen overflow-x-hidden">
-        <Navbar />
-        <main className="flex-grow">
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/estimate" element={<Estimate />} />
-              <Route path="/estimate-form" element={<EstimateForm />} />
-              <Route path="/services/:serviceId/inquiry" element={<ServiceInquiry />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-        <WhatsAppButton />
-      </div>
+      <AppContent />
     </Router>
   )
 }
