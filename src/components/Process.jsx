@@ -40,7 +40,7 @@ const Process = () => {
               data-aos="fade-up"
               data-aos-delay={index * 150}
             >
-              <div className="absolute -top-6 -left-6 w-16 h-16 bg-accent text-white rounded-full flex items-center justify-center font-black text-xl shadow-2xl group-hover:scale-110 transition-transform duration-500">
+              <div className="absolute -top-6 -left-2 md:-left-6 w-14 h-14 md:w-16 md:h-16 bg-accent text-white rounded-full flex items-center justify-center font-black text-lg md:text-xl shadow-2xl group-hover:scale-110 transition-transform duration-500">
                 0{index + 1}
               </div>
               <div className="w-16 h-16 bg-accent/5 text-accent rounded-2xl flex items-center justify-center mb-8 group-hover:bg-accent group-hover:text-white transition-all duration-500">

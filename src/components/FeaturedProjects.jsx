@@ -11,7 +11,7 @@ const FeaturedProjects = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-8">
           <div>
             <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-right">Curated Work</h2>
-            <h3 className="text-4xl md:text-6xl font-black text-text-dark" data-aos="fade-right" data-aos-delay="100">Featured Projects</h3>
+            <h3 className="text-3xl md:text-6xl font-black text-text-dark" data-aos="fade-right" data-aos-delay="100">Featured Projects</h3>
           </div>
           <Link 
             to="/projects" 
@@ -42,7 +42,7 @@ const FeaturedProjects = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
               <div className="absolute inset-0 p-10 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                 <span className="text-accent font-bold uppercase tracking-[0.4em] text-[10px] mb-2">{project.category}</span>
-                <h4 className="text-white text-3xl font-black">{project.title}</h4>
+                <h4 className="text-2xl md:text-3xl font-black">{project.title}</h4>
               </div>
             </Link>
           ))}

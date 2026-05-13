@@ -32,7 +32,7 @@ const ContactContent = () => {
             <div className="lg:col-span-5 space-y-8 md:space-y-12">
               <div>
                 <h2 className="text-accent uppercase tracking-[0.4em] text-[10px] font-bold mb-4 md:mb-6" data-aos="fade-right">Concierge</h2>
-                <h3 className="text-3xl md:text-4xl font-black text-text-dark leading-tight" data-aos="fade-right" data-aos-delay="100">Our Studio <br />Details.</h3>
+                <h3 className="text-2xl md:text-4xl font-black text-text-dark leading-tight" data-aos="fade-right" data-aos-delay="100">Our Studio <br />Details.</h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 md:gap-8">
@@ -57,7 +57,7 @@ const ContactContent = () => {
             {/* Form */}
             <div className="lg:col-span-7" data-aos="fade-left">
               <div className="bg-white p-6 sm:p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-luxury border border-gray-100">
-                <h4 className="text-2xl md:text-3xl font-black mb-6 md:mb-8 text-text-dark">Get a Free Quote</h4>
+                <h4 className="text-xl md:text-3xl font-black mb-6 md:mb-8 text-text-dark">Get a Free Quote</h4>
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                   <div className="relative group">
                     <label className="text-[9px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-2 md:mb-3 block group-focus-within:text-accent transition-colors">Your Name</label>

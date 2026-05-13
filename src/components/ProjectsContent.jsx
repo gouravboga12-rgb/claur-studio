@@ -10,7 +10,7 @@ const ProjectsContent = () => {
         <div className="section-container">
           <div className="mb-16 md:mb-24">
             <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-right">Our Portfolio</h2>
-            <h3 className="text-4xl md:text-6xl font-black text-text-dark" data-aos="fade-right" data-aos-delay="100">Featured Projects</h3>
+            <h3 className="text-3xl md:text-6xl font-black text-text-dark" data-aos="fade-right" data-aos-delay="100">Featured Projects</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
@@ -31,7 +31,7 @@ const ProjectsContent = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute inset-0 p-10 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <span className="text-accent font-bold uppercase tracking-[0.4em] text-[10px] mb-2">{project.category}</span>
-                  <h4 className="text-white text-3xl md:text-4xl font-black mb-4">{project.title}</h4>
+                  <h4 className="text-white text-2xl md:text-4xl font-black mb-4">{project.title}</h4>
                   <div className="flex items-center gap-3 text-white/60 text-[10px] font-bold uppercase tracking-[0.2em]">
                     <span>View Gallery</span>
                     <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -48,7 +48,7 @@ const ProjectsContent = () => {
         <div className="section-container">
           <div className="mb-16 md:mb-24">
             <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-right">Process & Execution</h2>
-            <h3 className="text-4xl md:text-6xl font-black text-text-dark" data-aos="fade-right" data-aos-delay="100">Site Execution</h3>
+            <h3 className="text-3xl md:text-6xl font-black text-text-dark" data-aos="fade-right" data-aos-delay="100">Site Execution</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">

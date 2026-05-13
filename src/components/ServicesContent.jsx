@@ -13,7 +13,7 @@ const ServicesContent = () => {
         {/* Section Heading */}
         <div className="text-center mb-20 md:mb-32">
           <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-up">Our Offerings</h2>
-          <h3 className="text-5xl md:text-7xl font-black tracking-tight text-text-dark" data-aos="fade-up" data-aos-delay="100">
+          <h3 className="text-3xl md:text-7xl font-black tracking-tight text-text-dark" data-aos="fade-up" data-aos-delay="100">
             Tailored <span className="text-accent">Solutions</span>.
           </h3>
           <p className="text-text-muted text-sm leading-relaxed max-w-2xl mx-auto mt-6" data-aos="fade-up" data-aos-delay="200">

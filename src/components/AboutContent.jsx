@@ -86,7 +86,7 @@ const AboutContent = () => {
             {values.map((value, index) => (
               <div 
                 key={index} 
-                className="p-6 md:p-12 rounded-[1.5rem] md:rounded-[2.5rem] bg-secondary hover:bg-accent group transition-all duration-700 cursor-default"
+                className="p-4 md:p-12 rounded-[1.5rem] md:rounded-[2.5rem] bg-secondary hover:bg-accent group transition-all duration-700 cursor-default"
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
               >

@@ -30,10 +30,10 @@ const Hero = () => {
           </div>
 
           <h1 
-            className="text-5xl sm:text-6xl md:text-8xl lg:text-[100px] xl:text-[120px] font-black mb-8 md:mb-12 leading-[0.85] tracking-tighter text-text-dark"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-[100px] xl:text-[120px] font-black mb-8 md:mb-12 leading-[0.85] tracking-tighter text-text-dark"
           >
             <span 
-              className="block text-xl md:text-2xl font-bold uppercase tracking-[0.5em] text-accent mb-4"
+              className="block text-sm md:text-2xl font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] text-accent mb-4"
               data-aos="fade-down"
               data-aos-delay="200"
             >
@@ -85,7 +85,7 @@ const Hero = () => {
           </div>
 
           <div 
-            className="flex flex-wrap items-center gap-6 md:gap-12"
+            className="flex flex-wrap items-center gap-8 md:gap-12"
             data-aos="fade-up"
             data-aos-delay="1200"
           >
