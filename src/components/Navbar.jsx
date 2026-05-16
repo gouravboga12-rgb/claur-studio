@@ -3,8 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 import { Menu, X, ArrowRight } from 'lucide-react'
 import logo from '../assets/logo_premium.png'
+import { useData } from '../hooks/useData'
 
 const Navbar = () => {
+  const { settings } = useData()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
@@ -94,7 +96,7 @@ const Navbar = () => {
           Project Inquiry
         </p>
         <p style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1A1A1A', marginBottom: '1.5rem' }}>
-          +91 90328 93101
+          {settings.phone || '+91 90328 93101'}
         </p>
         <Link
           to="/contact"
@@ -159,7 +161,7 @@ const Navbar = () => {
               to="/contact"
               className="px-6 py-3.5 rounded-full font-bold uppercase tracking-widest text-[9px] flex items-center gap-3 transition-all duration-500 shadow-xl border-2 bg-text-dark text-white border-text-dark hover:bg-accent hover:border-accent whitespace-nowrap"
             >
-              <span>Get Free Quote | +91 90328 93101</span>
+              <span>Get Free Quote | {settings.phone || '+91 90328 93101'}</span>
               <ArrowRight size={12} />
             </Link>
           </div>

@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { Send, CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { useData } from '../hooks/useData'
 
 const EstimateForm = () => {
+  const { settings } = useData()
   const [searchParams] = useSearchParams()
   const serviceFromParam = searchParams.get('service') || 'Full Interiors'
 
@@ -32,12 +34,36 @@ const EstimateForm = () => {
           message: `[ESTIMATE REQUEST]\nService: ${formData.serviceType}\nProject: ${formData.projectType}\nNotes: ${formData.message}`
         }])
       if (error) throw error
+      
+      // WhatsApp Alert
+      const adminWhatsApp = settings.whatsapp || '919032893101'
+      const waMessage = `📋 *New Estimate Request* 📋%0A%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.serviceType}%0A*Project:* ${formData.projectType}%0A%0A👉 _Check Admin Panel for full details._`
+      
+      window.open(`https://wa.me/${adminWhatsApp}?text=${waMessage}`, '_blank')
+
       setStatus('success')
       setFormData({ name: '', phone: '', email: '', projectType: '2BHK', serviceType: serviceFromParam, message: '' })
     } catch (err) {
       console.error(err)
       setStatus('error')
     }
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="pt-32 pb-20 min-h-screen bg-[#FAF7F2] flex items-center justify-center">
+        <div className="section-container max-w-2xl text-center bg-white p-12 md:p-20 rounded-[3rem] shadow-luxury" data-aos="zoom-in">
+          <div className="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-10 shadow-sm">
+            <CheckCircle2 size={40} />
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-text-dark mb-6">Thank You!</h2>
+          <p className="text-xl text-text-muted mb-12 leading-relaxed">
+            We've received your estimate request for <strong>{serviceLabel}</strong>. Our team will prepare a personalized quote and get back to you soon.
+          </p>
+          <Link to="/estimate" className="btn-accent px-12 py-4 inline-block">Calculate Another</Link>
+        </div>
+      </div>
+    )
   }
 
   const serviceLabel = {

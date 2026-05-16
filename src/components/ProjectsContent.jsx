@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
-import { projectsData, siteProjectsData } from '../data/projectsData'
+import { useData } from '../hooks/useData'
 
 const ProjectsContent = () => {
+  const { projects } = useData()
+  const mainProjects = projects.filter(p => p.category !== 'Site Execution')
+  const siteProjects = projects.filter(p => p.category === 'Site Execution')
   return (
     <div className="bg-white">
       {/* Our Portfolio Section */}
@@ -14,7 +17,7 @@ const ProjectsContent = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {projectsData.map((project, index) => (
+            {mainProjects.map((project, index) => (
               <Link 
                 key={project.id} 
                 to={`/projects/${project.id}`}
@@ -52,7 +55,7 @@ const ProjectsContent = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {siteProjectsData.map((project, index) => (
+            {siteProjects.map((project, index) => (
               <Link 
                 key={project.id} 
                 to={`/projects/${project.id}`}

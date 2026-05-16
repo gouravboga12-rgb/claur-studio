@@ -1,17 +1,28 @@
 import { useParams, Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { ArrowLeft, Send, CheckCircle } from 'lucide-react'
-import { servicesData } from '../data/servicesData'
+import { ArrowLeft, Send, CheckCircle2 } from 'lucide-react'
+import { useData } from '../hooks/useData'
+import { supabase } from '../lib/supabase'
 
 const ServiceInquiry = () => {
   const { serviceId } = useParams()
-  const service = servicesData.find(s => s.id === parseInt(serviceId))
+  const { services, loading } = useData()
+  const service = services.find(s => String(s.id) === String(serviceId))
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({})
 
-  if (!service) {
+  if (loading && !submitted) {
     return (
-      <div className="pt-32 pb-20 text-center">
+      <div className="pt-40 pb-20 flex flex-col items-center justify-center min-h-screen">
+        <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">Loading Studio Details...</p>
+      </div>
+    )
+  }
+
+  if (!service && !submitted) {
+    return (
+      <div className="pt-32 pb-20 text-center min-h-screen">
         <h1 className="text-4xl font-black mb-8">Service Not Found</h1>
         <Link to="/services" className="text-accent font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2">
           <ArrowLeft size={16} /> Back to Services
@@ -43,7 +54,7 @@ const ServiceInquiry = () => {
           name: formData.fullName,
           email: formData.email,
           phone: formData.phone,
-          message: `[SERVICE INQUIRY: ${service.name}]\n` + 
+          message: `[SERVICE INQUIRY: ${service.title || service.name}]\n` + 
                    Object.entries(formData)
                      .filter(([key]) => !['fullName', 'email', 'phone'].includes(key))
                      .map(([key, val]) => `${key}: ${Array.isArray(val) ? val.join(', ') : val}`)
@@ -51,6 +62,15 @@ const ServiceInquiry = () => {
         }])
       
       if (error) throw error
+
+      // WhatsApp Alert
+      const { data: settingsData } = await supabase.from('settings').select('*')
+      const settings = Object.fromEntries(settingsData?.map(s => [s.key, s.value]) || [])
+      const adminWhatsApp = settings.whatsapp || '919032893101'
+      const waMessage = `🛠️ *New Service Inquiry* 🛠️%0A%0A*Service:* ${service.title || service.name}%0A*Client:* ${formData.fullName}%0A*Phone:* ${formData.phone}%0A%0A👉 _Check Admin Panel for full details._`
+      
+      window.open(`https://wa.me/${adminWhatsApp}?text=${waMessage}`, '_blank')
+
       setSubmitted(true)
       window.scrollTo(0, 0)
     } catch (err) {
@@ -70,16 +90,18 @@ const ServiceInquiry = () => {
         </Link>
 
         {submitted ? (
-          <div className="max-w-2xl mx-auto bg-white p-12 md:p-20 rounded-[3rem] shadow-luxury text-center" data-aos="zoom-in">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8 text-green-600">
-              <CheckCircle size={40} />
+          <section className="py-12 md:py-24 flex items-center justify-center">
+            <div className="w-full max-w-2xl text-center bg-white p-12 md:p-20 rounded-[3rem] shadow-luxury" data-aos="zoom-in">
+              <div className="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-10 shadow-sm">
+                <CheckCircle2 size={40} />
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-text-dark mb-6">Thank You!</h2>
+              <p className="text-xl text-text-muted mb-12 leading-relaxed">
+                We've received your inquiry. Our team will review your requirements and <strong>we will get back to you soon</strong>.
+              </p>
+              <Link to="/services" className="btn-accent px-12 py-4 inline-block">Back to Services</Link>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black mb-6">Thank You!</h2>
-            <p className="text-text-muted mb-12 leading-relaxed">
-              We've received your inquiry for <strong>{service.name}</strong>. Our design consultant will reach out to you within 24 hours to discuss your project in detail.
-            </p>
-            <Link to="/services" className="btn-accent inline-block">Explore Other Services</Link>
-          </div>
+          </section>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-start">
             <div data-aos="fade-right">
@@ -135,40 +157,48 @@ const ServiceInquiry = () => {
                 <div className="w-full h-px bg-gray-100 my-8"></div>
 
                 {/* Dynamic Service Specific Fields */}
-                {service.formFields.map((field) => (
+                {(service.form_fields || service.formFields || []).map((field) => (
                   <div key={field.name} className="space-y-4">
                     <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{field.label}</label>
                     
                     {field.type === 'select' && (
                       <select 
-                        name={field.name} required onChange={handleInputChange}
-                        className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all appearance-none cursor-pointer"
+                        name={field.name} onChange={handleInputChange}
+                        className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all appearance-none cursor-pointer font-bold text-sm"
                       >
                         <option value="">Select an option</option>
-                        {field.options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                        {field.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                       </select>
                     )}
 
                     {field.type === 'number' && (
                       <input 
-                        type="number" name={field.name} required onChange={handleInputChange}
-                        className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all"
-                        placeholder="Enter value"
+                        type="number" name={field.name} onChange={handleInputChange}
+                        className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all font-bold text-sm"
+                        placeholder={field.placeholder || "Enter number..."}
                       />
                     )}
 
                     {field.type === 'checkbox' && (
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                        {field.options.map(opt => (
+                        {field.options?.map(opt => (
                           <label key={opt} className="flex items-center gap-3 cursor-pointer group">
                             <input 
                               type="checkbox" name={field.name} value={opt} onChange={handleInputChange}
                               className="w-5 h-5 rounded border-none bg-secondary text-accent focus:ring-accent cursor-pointer"
                             />
-                            <span className="text-sm text-gray-600 group-hover:text-text-dark transition-colors">{opt}</span>
+                            <span className="text-sm text-gray-600 group-hover:text-text-dark transition-colors font-bold">{opt}</span>
                           </label>
                         ))}
                       </div>
+                    )}
+
+                    {field.type === 'text' && (
+                      <input 
+                        type="text" name={field.name} onChange={handleInputChange}
+                        className="w-full bg-secondary border-none rounded-2xl p-4 focus:ring-2 focus:ring-accent outline-none transition-all font-bold text-sm"
+                        placeholder={field.placeholder || "Enter details..."}
+                      />
                     )}
                   </div>
                 ))}
@@ -188,8 +218,8 @@ const ServiceInquiry = () => {
                 </button>
               </form>
             </div>
-          </div>
-        )}
+              </div>
+            )}
       </div>
     </div>
   )

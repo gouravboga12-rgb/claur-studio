@@ -9,16 +9,7 @@ const ServicesContent = () => {
   return (
     <section className="section-padding bg-white">
       <div className="section-container">
-        {/* Section Heading */}
-        <div className="text-center mb-20 md:mb-32">
-          <h2 className="text-accent uppercase tracking-[0.4em] text-xs font-bold mb-6" data-aos="fade-up">Our Offerings</h2>
-          <h3 className="text-3xl md:text-7xl font-black tracking-tight text-text-dark" data-aos="fade-up" data-aos-delay="100">
-            Tailored <span className="text-accent">Solutions</span>.
-          </h3>
-          <p className="text-text-muted text-sm leading-relaxed max-w-2xl mx-auto mt-6" data-aos="fade-up" data-aos-delay="200">
-            From initial sketches to final execution, we offer comprehensive design solutions that harmonize luxury with everyday functionality.
-          </p>
-        </div>
+        {/* Service Grid Section */}
 
         {/* Service Grid */}
         {loading ? (
@@ -33,7 +24,7 @@ const ServicesContent = () => {
                 <div key={service.id} 
                   className="group relative h-[380px] md:h-[600px] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-text-dark"
                   data-aos="fade-up" data-aos-delay={index * 100}>
-                  <img src={service.image} alt={service.name} 
+                  <img src={service.image} alt={service.title || service.name} 
                     className="w-full h-full object-cover opacity-60 transition-transform duration-[2000ms] group-hover:scale-110 group-hover:opacity-40"
                     loading="lazy" />
                   <div className="absolute top-5 left-5 md:top-8 md:left-8 bg-accent px-4 py-1.5 md:px-6 md:py-2 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-white shadow-xl">
@@ -46,8 +37,8 @@ const ServicesContent = () => {
                         <span className="w-1 h-1 bg-accent rounded-full"></span>
                         <span>{service.style}</span>
                       </div>
-                      <h4 className="text-white text-2xl md:text-4xl font-black mb-4 md:mb-8 group-hover:text-accent transition-colors">{service.name}</h4>
-                      <p className="text-white/60 text-base md:text-lg mb-8 md:mb-12 opacity-0 group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0">
+                      <h4 className="text-white text-2xl md:text-4xl font-black mb-4 md:mb-8 group-hover:text-accent transition-colors">{service.title || service.name}</h4>
+                      <p className="text-white/80 text-sm md:text-base mb-8 md:mb-10 leading-relaxed">
                         {service.description}
                       </p>
                       <Link 

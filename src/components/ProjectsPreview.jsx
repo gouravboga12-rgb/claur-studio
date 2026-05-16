@@ -1,42 +1,10 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Plus } from 'lucide-react'
-
-
-
+import { useData } from '../hooks/useData'
 
 const ProjectsPreview = () => {
-  const projects = [
-    {
-      title: "The Minimalist Loft",
-      category: "Living Room",
-      image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800",
-      size: "large"
-    },
-    {
-      title: "Culinary Masterpiece",
-      category: "Kitchen",
-      image: "/kitchen-1.png",
-      size: "small"
-    },
-    {
-      title: "Velvet Suite",
-      category: "Bedroom",
-      image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=800",
-      size: "small"
-    },
-    {
-      title: "The Royal Ensuite",
-      category: "Bath",
-      image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80&w=800",
-      size: "large"
-    },
-    {
-      title: "Corporate Zen",
-      category: "Office",
-      image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=800",
-      size: "medium"
-    }
-  ]
+  const { projects: allProjects } = useData()
+  const projects = allProjects.filter(p => p.category !== 'Site Execution').slice(0, 5)
 
   return (
     <section className="section-padding">
@@ -63,9 +31,10 @@ const ProjectsPreview = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
           {projects.map((project, index) => {
+            const size = project.size || (index % 3 === 0 ? 'large' : 'small')
             const spanClass = 
-              project.size === 'large' ? 'lg:col-span-8' : 
-              project.size === 'medium' ? 'lg:col-span-12' : 
+              size === 'large' ? 'lg:col-span-8' : 
+              size === 'medium' ? 'lg:col-span-12' : 
               'lg:col-span-4';
             
             return (
@@ -76,7 +45,7 @@ const ProjectsPreview = () => {
                 data-aos-delay={index * 100}
               >
                 <img 
-                  src={project.image} 
+                  src={project.coverImage || project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
                   loading="lazy"

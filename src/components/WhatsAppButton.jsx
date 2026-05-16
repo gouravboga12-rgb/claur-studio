@@ -1,7 +1,9 @@
 import { MessageCircle } from 'lucide-react'
+import { useData } from '../hooks/useData'
 
 const WhatsAppButton = () => {
-  const phoneNumber = "+919032893101"
+  const { settings } = useData()
+  const phoneNumber = settings.whatsapp || "919032893101"
   const message = encodeURIComponent("Hi, I am interested in your interior design services.")
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
 

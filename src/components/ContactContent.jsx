@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Phone, Mail, MapPin, Send } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { useData } from '../hooks/useData'
 
 const ContactContent = () => {
+  const { settings } = useData()
   const serviceOptions = ['Full Home Interiors', 'Modular Kitchen', 'Wardrobe Design', 'Living Room', 'Bedroom', 'Office / Commercial', 'Others']
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', serviceType: '', message: '' })
   const [status, setStatus] = useState('idle')
@@ -11,15 +13,43 @@ const ContactContent = () => {
     e.preventDefault()
     setStatus('loading')
     try {
-      const { error } = await supabase.from('enquiries').insert([formData])
+      const { error } = await supabase.from('enquiries').insert([{
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        message: `[CONTACT INQUIRY]\nService: ${formData.serviceType}\nMessage: ${formData.message}`
+      }])
       if (error) throw error
+
+      // WhatsApp Alert
+      const adminWhatsApp = settings.whatsapp || '919032893101'
+      const waMessage = `✨ *New Contact Inquiry* ✨%0A%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.serviceType}%0A*Message:* ${formData.message}%0A%0A👉 _Check Admin Panel for full details._`
+      
+      window.open(`https://wa.me/${adminWhatsApp}?text=${waMessage}`, '_blank')
+
       setStatus('success')
       setFormData({ name: '', phone: '', email: '', serviceType: '', message: '' })
-      setTimeout(() => setStatus('idle'), 5000)
     } catch (error) {
       console.error('Error submitting form:', error)
       setStatus('error')
     }
+  }
+
+  if (status === 'success') {
+    return (
+      <section className="py-24 md:py-32 bg-white">
+        <div className="section-container max-w-2xl text-center">
+          <div className="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-10 shadow-luxury" data-aos="zoom-in">
+            <Send size={40} />
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black text-text-dark mb-6" data-aos="fade-up">Thank You!</h2>
+          <p className="text-xl text-text-muted mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+            Your message has been received. We've sent a notification to our team, and we'll get back to you soon.
+          </p>
+          <button onClick={() => setStatus('idle')} className="btn-accent px-12 py-4">Back to Form</button>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -37,9 +67,9 @@ const ContactContent = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 md:gap-8">
                 {[
-                  { icon: <Phone size={22} />, label: 'Speak to us', value: '+91 90328 93101' },
-                  { icon: <Mail size={22} />, label: 'Inquiry Email', value: 'claurstudio@gmail.com', breakAll: true },
-                  { icon: <MapPin size={22} />, label: 'Our Studio', value: 'Service Rd, Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074' },
+                  { icon: <Phone size={22} />, label: 'Speak to us', value: settings.phone || '+91 90328 93101', link: `tel:${settings.phone}` },
+                  { icon: <Mail size={22} />, label: 'Inquiry Email', value: settings.email || 'claurstudio@gmail.com', breakAll: true, link: `mailto:${settings.email}` },
+                  { icon: <MapPin size={22} />, label: 'Our Studio', value: settings.address || 'Service Rd, Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074' },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-5 md:gap-6 group" data-aos="fade-right" data-aos-delay={200 + i * 100}>
                     <div className="w-12 h-12 md:w-14 md:h-14 bg-secondary rounded-xl md:rounded-2xl flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-white transition-all duration-500">
@@ -47,7 +77,11 @@ const ContactContent = () => {
                     </div>
                     <div>
                       <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-1">{item.label}</h4>
-                      <p className={`text-base md:text-xl font-black text-text-dark leading-snug ${item.breakAll ? 'break-all' : ''}`}>{item.value}</p>
+                      {item.link ? (
+                        <a href={item.link} className={`text-base md:text-xl font-black text-text-dark leading-snug hover:text-accent transition-colors ${item.breakAll ? 'break-all' : ''}`}>{item.value}</a>
+                      ) : (
+                        <p className={`text-base md:text-xl font-black text-text-dark leading-snug ${item.breakAll ? 'break-all' : ''}`}>{item.value}</p>
+                      )}
                     </div>
                   </div>
                 ))}

@@ -1,19 +1,17 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Maximize2, X } from 'lucide-react'
 import { useState, useMemo, useEffect } from 'react'
-import { projectsData, siteProjectsData } from '../data/projectsData'
+import { useData } from '../hooks/useData'
 
 const ProjectDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { projects: allProjects } = useData()
   const [selectedImage, setSelectedImage] = useState(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-
-  // Combine all projects for navigation
-  const allProjects = useMemo(() => [...projectsData, ...siteProjectsData], [])
   
   // Find current project
-  const projectIndex = allProjects.findIndex(p => p.id === id)
+  const projectIndex = allProjects.findIndex(p => p.id === id || p.title === id)
   const project = allProjects[projectIndex]
 
   // Calculate prev/next

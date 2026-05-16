@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
-import { projectsData } from '../data/projectsData'
+import { useData } from '../hooks/useData'
 
 const FeaturedProjects = () => {
-  const projects = projectsData.slice(0, 3)
+  const { projects: allProjects } = useData()
+  const projects = allProjects.filter(p => p.category !== 'Site Execution').slice(0, 3)
 
   return (
     <section className="section-padding bg-white">

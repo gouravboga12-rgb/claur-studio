@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
+import { useData } from '../hooks/useData'
 
 
 
 import logo from '../assets/logo.png'
 
 const Footer = () => {
+  const { settings } = useData()
   return (
     <footer className="bg-text-dark text-white pt-20 md:pt-32 pb-12 md:pb-16 overflow-hidden relative">
       {/* Background Accent */}
@@ -81,19 +83,22 @@ const Footer = () => {
             <div className="space-y-8 md:space-y-12">
               <div className="group">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2">Speak to us</p>
-                <p className="text-lg font-black group-hover:text-accent transition-colors">+91 90328 93101</p>
+                <a href={`tel:${settings.phone || '+919032893101'}`} className="text-lg font-black group-hover:text-accent transition-colors">
+                  {settings.phone || '+91 90328 93101'}
+                </a>
               </div>
               <div className="group">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2">Email Address</p>
-                <p className="text-lg font-black group-hover:text-accent transition-colors">claurstudio@gmail.com</p>
+                <a href={`mailto:${settings.email || 'claurstudio@gmail.com'}`} className="text-lg font-black group-hover:text-accent transition-colors break-all">
+                  {settings.email || 'claurstudio@gmail.com'}
+                </a>
               </div>
               <div className="group">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-500 mb-2">Location</p>
                 <p className="text-sm font-bold leading-relaxed max-w-[250px]">
-                  Service Rd, Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074
+                  {settings.address || 'Service Rd, Chandrapuri Colony, L.B. Nagar, Hyderabad - 500074'}
                 </p>
               </div>
-
             </div>
           </div>
         </div>
