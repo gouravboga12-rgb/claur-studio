@@ -25,6 +25,7 @@ const Admin = () => {
   const [serviceFormFields, setServiceFormFields] = useState([]) // Array of {name, label, type, placeholder}
   const [isSettingsEditable, setIsSettingsEditable] = useState(false)
   const [tempSettings, setTempSettings] = useState({})
+  const [isSyncEnabled, setIsSyncEnabled] = useState(false)
 
   const openUploadWidget = () => {
     window.cloudinary.openUploadWidget(
@@ -492,7 +493,20 @@ const Admin = () => {
             <div className="bg-white p-12 rounded-[3rem] border border-gray-100 shadow-sm">
               <div className="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div className="max-w-xl">
-                  <h3 className="text-2xl font-black text-text-dark mb-4">Database Synchronization</h3>
+                  <div className="flex items-center gap-4 mb-4">
+                    <h3 className="text-2xl font-black text-text-dark">Database Synchronization</h3>
+                    <button 
+                      onClick={() => setIsSyncEnabled(!isSyncEnabled)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-[9px] uppercase tracking-widest transition-all ${
+                        isSyncEnabled 
+                          ? 'bg-red-50 text-red-500 hover:bg-red-100' 
+                          : 'bg-accent/10 text-accent hover:bg-accent/20'
+                      }`}
+                    >
+                      {isSyncEnabled ? <Lock size={12} /> : <Edit2 size={12} />}
+                      <span>{isSyncEnabled ? 'Disable Sync' : 'Enable Sync'}</span>
+                    </button>
+                  </div>
                   <p className="text-gray-500 font-bold text-sm leading-relaxed">
                     If your dashboard is empty, use this button to sync your local data files with Supabase. This will populate your Projects, Services, and Testimonials.
                   </p>
@@ -500,8 +514,8 @@ const Admin = () => {
                 <div className="flex flex-col gap-3">
                   <button 
                     onClick={seedInitialData} 
-                    disabled={isSubmitting}
-                    className="px-10 py-5 bg-accent text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-text-dark transition-all shadow-xl disabled:opacity-50"
+                    disabled={isSubmitting || !isSyncEnabled}
+                    className="px-10 py-5 bg-accent text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-text-dark transition-all shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'Syncing...' : 'Sync Initial Data'}
                   </button>
