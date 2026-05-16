@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Plus, Edit2, Trash2, Layout, Briefcase, LogOut, Image as ImageIcon, Save, X, Lock, Inbox, User, Phone, Mail, Calendar, Settings, Star, Database, ArrowRight, ExternalLink, MessageCircle, AlertCircle, RefreshCw, Menu } from 'lucide-react'
+import { Plus, Edit2, Trash2, Layout, Briefcase, LogOut, Image as ImageIcon, Save, X, Lock, Inbox, User, Phone, Mail, Calendar, Settings, Star, Database, ArrowRight, ExternalLink, MessageCircle, AlertCircle, RefreshCw, Menu, CheckCircle2 } from 'lucide-react'
 import { projectsData, siteProjectsData } from '../data/projectsData'
 import { servicesData } from '../data/servicesData'
 import { supabase } from '../lib/supabase'
 
 const Admin = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(() => localStorage.getItem('isAdminAuthenticated') === 'true')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -23,6 +23,8 @@ const Admin = () => {
   const [uploadedImageUrl, setUploadedImageUrl] = useState('')
   const [projectGallery, setProjectGallery] = useState([]) // Array of {url, room}
   const [serviceFormFields, setServiceFormFields] = useState([]) // Array of {name, label, type, placeholder}
+  const [isSettingsEditable, setIsSettingsEditable] = useState(false)
+  const [tempSettings, setTempSettings] = useState({})
 
   const openUploadWidget = () => {
     window.cloudinary.openUploadWidget(
@@ -186,8 +188,9 @@ const Admin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    if (email === 'aurstudio@gmail.com' && password === 'Claur@54321') {
+    if (email === 'claurstudio@gmail.com' && password === 'Claur@54321') {
       setIsAuthenticated(true)
+      localStorage.setItem('isAdminAuthenticated', 'true')
     } else {
       alert('Invalid credentials')
     }
@@ -195,6 +198,7 @@ const Admin = () => {
 
   const handleLogout = () => {
     setIsAuthenticated(false)
+    localStorage.removeItem('isAdminAuthenticated')
     setEmail('')
     setPassword('')
   }
@@ -246,7 +250,11 @@ const Admin = () => {
     }
     
     let error
-    if (editingItem) {
+    if (modalType === 'form_config') {
+      const configKey = `form_config_${editingItem.type}`
+      const { error: err } = await supabase.from('settings').upsert({ key: configKey, value: { fields: serviceFormFields } })
+      error = err
+    } else if (editingItem) {
       const { error: err } = await supabase.from(tableMap[modalType]).update(rawData).eq('id', editingItem.id)
       error = err
     } else {
@@ -268,6 +276,22 @@ const Admin = () => {
     const { error } = await supabase.from('settings').upsert({ key, value })
     if (error) alert('Error updating setting: ' + error.message)
     else fetchData()
+  }
+
+  const handleSaveAllSettings = async () => {
+    setIsSubmitting(true)
+    try {
+      const updates = Object.entries(tempSettings).map(([key, value]) => ({ key, value }))
+      const { error } = await supabase.from('settings').upsert(updates)
+      if (error) throw error
+      
+      setIsSettingsEditable(false)
+      fetchData()
+    } catch (error) {
+      alert('Error saving settings: ' + error.message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const addGalleryItem = () => {
@@ -367,6 +391,7 @@ const Admin = () => {
             { id: 'inquiries', icon: <Inbox size={20} />, label: 'Inquiries' },
             { id: 'testimonials', icon: <Star size={20} />, label: 'Testimonials' },
             { id: 'settings', icon: <Settings size={20} />, label: 'Settings' },
+            { id: 'estimate-forms', icon: <Database size={20} />, label: 'Estimate Forms' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -400,13 +425,14 @@ const Admin = () => {
         <div className="flex justify-between items-center mb-12">
           <div>
             <h1 className="text-3xl md:text-4xl font-black text-text-dark capitalize">
-              {activeTab === 'dashboard' ? 'Overview' : activeTab === 'estimates' ? 'Estimate Requests' : `${activeTab} Management`}
+              {activeTab === 'dashboard' ? 'Overview' : activeTab === 'estimates' ? 'Estimate Requests' : activeTab === 'estimate-forms' ? 'Form Configuration' : `${activeTab} Management`}
             </h1>
             <p className="text-gray-500 font-bold text-sm mt-2">
               {activeTab === 'dashboard' ? 'Quick summary of your studio operations.' : 
                activeTab === 'estimates' ? 'Manage detailed quote requests from your potential clients.' :
                activeTab === 'inquiries' ? 'General contact and inquiry messages.' :
                activeTab === 'settings' ? 'Update global site information and contact details.' :
+               activeTab === 'estimate-forms' ? 'Configure fields and questions for estimate forms.' :
                `Create, edit, and manage your studio ${activeTab}.`}
             </p>
           </div>
@@ -590,10 +616,28 @@ const Admin = () => {
         {activeTab === 'settings' && (
           <div className="max-w-4xl space-y-8">
             <div className="bg-white rounded-[3rem] p-10 shadow-luxury border border-gray-50">
-              <h3 className="text-2xl font-black text-text-dark mb-10 flex items-center gap-4">
-                <Settings className="text-accent" />
-                Global Site Info
-              </h3>
+              <div className="flex justify-between items-center mb-10">
+                <h3 className="text-2xl font-black text-text-dark flex items-center gap-4">
+                  <Settings className="text-accent" />
+                  Global Site Info
+                </h3>
+                <button 
+                  onClick={() => {
+                    if (!isSettingsEditable) {
+                      setTempSettings({...settings})
+                    }
+                    setIsSettingsEditable(!isSettingsEditable)
+                  }}
+                  className={`flex items-center gap-3 px-6 py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all ${
+                    isSettingsEditable 
+                      ? 'bg-gray-100 text-gray-500 hover:bg-gray-200' 
+                      : 'bg-accent/10 text-accent hover:bg-accent/20'
+                  }`}
+                >
+                  {isSettingsEditable ? <X size={16} /> : <Edit2 size={16} />}
+                  <span>{isSettingsEditable ? 'Cancel' : 'Unlock to Edit'}</span>
+                </button>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[
                   { key: 'phone', label: 'Contact Phone', icon: <Phone /> },
@@ -606,11 +650,16 @@ const Admin = () => {
                     <div className="flex gap-2">
                       <div className="relative flex-grow">
                         <input 
-                          defaultValue={settings[field.key] || ''}
-                          onBlur={(e) => handleUpdateSetting(field.key, e.target.value)}
-                          className="w-full bg-secondary/50 border border-gray-100 rounded-xl pl-12 pr-4 py-3 outline-none focus:border-accent font-bold text-sm" 
+                          disabled={!isSettingsEditable}
+                          value={isSettingsEditable ? (tempSettings[field.key] || '') : (settings[field.key] || '')}
+                          onChange={(e) => setTempSettings({...tempSettings, [field.key]: e.target.value})}
+                          className={`w-full border rounded-xl pl-12 pr-4 py-3 outline-none transition-all font-bold text-sm ${
+                            isSettingsEditable 
+                              ? 'bg-white border-accent/20 focus:border-accent' 
+                              : 'bg-secondary/50 border-gray-100 cursor-not-allowed text-gray-400'
+                          }`} 
                         />
-                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-accent">
+                        <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${isSettingsEditable ? 'text-accent' : 'text-gray-300'}`}>
                           {field.icon}
                         </div>
                       </div>
@@ -621,11 +670,129 @@ const Admin = () => {
               <div className="mt-10 space-y-2">
                 <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Office Address</label>
                 <textarea 
-                  defaultValue={settings.address || ''}
-                  onBlur={(e) => handleUpdateSetting('address', e.target.value)}
+                  disabled={!isSettingsEditable}
+                  value={isSettingsEditable ? (tempSettings.address || '') : (settings.address || '')}
+                  onChange={(e) => setTempSettings({...tempSettings, address: e.target.value})}
                   rows="3"
-                  className="w-full bg-secondary/50 border border-gray-100 rounded-2xl px-6 py-4 outline-none focus:border-accent font-bold text-sm resize-none"
+                  className={`w-full border rounded-2xl px-6 py-4 outline-none transition-all font-bold text-sm resize-none ${
+                    isSettingsEditable 
+                      ? 'bg-white border-accent/20 focus:border-accent' 
+                      : 'bg-secondary/50 border-gray-100 cursor-not-allowed text-gray-400'
+                  }`}
                 ></textarea>
+              </div>
+
+              {isSettingsEditable && (
+                <div className="mt-12 flex justify-end">
+                  <button 
+                    onClick={handleSaveAllSettings}
+                    disabled={isSubmitting}
+                    className="flex items-center gap-3 bg-accent text-white px-10 py-4 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-text-dark transition-all duration-500 shadow-xl disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    ) : (
+                      <Save size={18} />
+                    )}
+                    <span>Save Changes</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Estimate Forms Configuration Tab */}
+        {activeTab === 'estimate-forms' && (
+          <div className="max-w-5xl space-y-8">
+            <div className="bg-white rounded-[3rem] p-10 shadow-luxury border border-gray-50">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 pb-8 border-b border-gray-100">
+                <div>
+                  <h3 className="text-2xl font-black text-text-dark flex items-center gap-4">
+                    <Database className="text-accent" />
+                    Estimate Form Builder
+                  </h3>
+                  <p className="text-gray-400 font-bold text-xs mt-1">Configure fields for different estimate types.</p>
+                </div>
+                <div className="flex gap-3">
+                  {['Full Interiors', 'Modular Kitchen', 'Wardrobe Only'].map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => {
+                        const configKey = `form_config_${type}`
+                        const rawConfig = settings[configKey]
+                        const currentConfig = (typeof rawConfig === 'string' ? JSON.parse(rawConfig) : rawConfig) || {
+                          fields: [
+                            { label: 'Full Name', name: 'name', type: 'text', required: true, placeholder: 'E.g. Karan Dadga' },
+                            { label: 'Phone Number', name: 'phone', type: 'tel', required: true, placeholder: '+91 00000 00000' },
+                            { label: 'Email (Optional)', name: 'email', type: 'email', required: false, placeholder: 'your@email.com' },
+                            { label: 'Select Project Type', name: 'projectType', type: 'buttons', options: ['1BHK', '2BHK', '3BHK', 'Villa', 'Office', 'Other'], required: true },
+                            { label: 'Additional Notes', name: 'message', type: 'textarea', required: false, placeholder: 'Tell us about your dream space...' }
+                          ]
+                        }
+                        setEditingItem({ type, config: currentConfig })
+                        setServiceFormFields(currentConfig.fields || [])
+                        setIsModalOpen(true)
+                        setModalType('form_config')
+                      }}
+                      className="px-6 py-3 bg-secondary hover:bg-accent hover:text-white rounded-xl font-bold text-[10px] uppercase tracking-widest transition-all shadow-sm"
+                    >
+                      Configure {type.split(' ')[0]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {['Full Interiors', 'Modular Kitchen', 'Wardrobe Only'].map((type) => {
+                  const configKey = `form_config_${type}`
+                  const rawConfig = settings[configKey]
+                  const config = (typeof rawConfig === 'string' ? JSON.parse(rawConfig) : rawConfig) || null
+                  return (
+                    <div key={type} className="bg-secondary/20 p-8 rounded-[2.5rem] border border-gray-100 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-6">
+                        <span className="text-accent font-black uppercase tracking-[0.2em] text-[10px]">Form Template</span>
+                        {config ? (
+                          <div className="flex items-center gap-1 text-green-500">
+                            <CheckCircle2 size={12} />
+                            <span className="text-[10px] font-bold">Configured</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-1 text-gray-400">
+                            <AlertCircle size={12} />
+                            <span className="text-[10px] font-bold">Default</span>
+                          </div>
+                        )}
+                      </div>
+                      <h4 className="text-xl font-black text-text-dark mb-4">{type}</h4>
+                      <p className="text-gray-500 text-xs font-bold leading-relaxed mb-8 flex-grow">
+                        {config ? `${config.fields.length} dynamic fields configured.` : 'Using default system fields: Name, Phone, Email, Project Type, and Notes.'}
+                      </p>
+                      <button 
+                        onClick={() => {
+                          const configKey = `form_config_${type}`
+                          const rawConfig = settings[configKey]
+                          const currentConfig = (typeof rawConfig === 'string' ? JSON.parse(rawConfig) : rawConfig) || {
+                            fields: [
+                              { label: 'Full Name', name: 'name', type: 'text', required: true, placeholder: 'E.g. Karan Dadga' },
+                              { label: 'Phone Number', name: 'phone', type: 'tel', required: true, placeholder: '+91 00000 00000' },
+                              { label: 'Email (Optional)', name: 'email', type: 'email', required: false, placeholder: 'your@email.com' },
+                              { label: 'Select Project Type', name: 'projectType', type: 'buttons', options: ['1BHK', '2BHK', '3BHK', 'Villa', 'Office', 'Other'], required: true },
+                              { label: 'Additional Notes', name: 'message', type: 'textarea', required: false, placeholder: 'Tell us about your dream space...' }
+                            ]
+                          }
+                          setEditingItem({ type, config: currentConfig })
+                          setServiceFormFields(currentConfig.fields || [])
+                          setIsModalOpen(true)
+                          setModalType('form_config')
+                        }}
+                        className="w-full py-4 bg-white border border-gray-100 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-accent hover:text-white transition-all shadow-sm"
+                      >
+                        Edit Configuration
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -939,7 +1106,145 @@ const Admin = () => {
                 </div>
               )}
 
-              <div className="space-y-2">
+              {/* Form Configuration Management */}
+              {modalType === 'form_config' && (
+                <div className="space-y-6 pt-6 border-t border-gray-100">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">Form Questions for {editingItem.type}</label>
+                      <p className="text-[9px] text-gray-400 mt-1">Configure the sequence and types of fields.</p>
+                    </div>
+                    <button 
+                      type="button" 
+                      onClick={() => setServiceFormFields([...serviceFormFields, { name: '', label: '', type: 'text', placeholder: '' }])} 
+                      className="text-accent flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest hover:opacity-70 transition-opacity cursor-pointer"
+                    >
+                      <Plus size={14} /> Add Field
+                    </button>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 gap-4">
+                    {serviceFormFields.map((field, index) => (
+                      <div key={index} className="bg-secondary/20 p-6 rounded-[2rem] border border-gray-100 space-y-4">
+                        <div className="flex justify-between items-center">
+                          <span className="text-[10px] font-black uppercase text-accent">Field #{index + 1}</span>
+                          <div className="flex gap-2">
+                            <button 
+                              type="button" 
+                              onClick={() => {
+                                if (index > 0) {
+                                  const newFields = [...serviceFormFields]
+                                  const temp = newFields[index]
+                                  newFields[index] = newFields[index - 1]
+                                  newFields[index - 1] = temp
+                                  setServiceFormFields(newFields)
+                                }
+                              }}
+                              className="text-gray-400 hover:text-text-dark"
+                              title="Move Up"
+                            >
+                              <ArrowRight size={16} className="-rotate-90" />
+                            </button>
+                            <button 
+                              type="button" 
+                              onClick={() => setServiceFormFields(serviceFormFields.filter((_, i) => i !== index))}
+                              className="text-red-500 hover:text-red-700"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                          <div className="space-y-1">
+                            <label className="text-[9px] font-bold text-gray-400 uppercase">Field Label</label>
+                            <input 
+                              value={field.label}
+                              onChange={(e) => {
+                                const newFields = [...serviceFormFields]
+                                newFields[index].label = e.target.value
+                                newFields[index].name = e.target.value.toLowerCase().replace(/\s+/g, '_')
+                                setServiceFormFields(newFields)
+                              }}
+                              placeholder="e.g. Full Name"
+                              className="w-full bg-white border border-gray-100 rounded-xl px-4 py-3 outline-none focus:border-accent font-bold text-xs shadow-sm" 
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[9px] font-bold text-gray-400 uppercase">Input Name (ID)</label>
+                            <input 
+                              value={field.name}
+                              onChange={(e) => {
+                                const newFields = [...serviceFormFields]
+                                newFields[index].name = e.target.value
+                                setServiceFormFields(newFields)
+                              }}
+                              placeholder="e.g. name"
+                              className="w-full bg-white border border-gray-100 rounded-xl px-4 py-3 outline-none focus:border-accent font-bold text-xs shadow-sm" 
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[9px] font-bold text-gray-400 uppercase">Field Type</label>
+                            <select 
+                              value={field.type}
+                              onChange={(e) => {
+                                const newFields = [...serviceFormFields]
+                                newFields[index].type = e.target.value
+                                if ((e.target.value === 'select' || e.target.value === 'buttons') && !newFields[index].options) {
+                                  newFields[index].options = []
+                                }
+                                setServiceFormFields(newFields)
+                              }}
+                              className="w-full bg-white border border-gray-100 rounded-xl px-4 py-3 outline-none focus:border-accent font-bold text-xs shadow-sm"
+                            >
+                              <option value="text">Short Text</option>
+                              <option value="tel">Phone/Tel</option>
+                              <option value="email">Email</option>
+                              <option value="select">Dropdown (Options)</option>
+                              <option value="buttons">BHK Style Buttons</option>
+                              <option value="number">Number</option>
+                              <option value="textarea">Large Text Area</option>
+                            </select>
+                          </div>
+                          <div className="space-y-1">
+                            <label className="text-[9px] font-bold text-gray-400 uppercase">Placeholder</label>
+                            <input 
+                              value={field.placeholder}
+                              onChange={(e) => {
+                                const newFields = [...serviceFormFields]
+                                newFields[index].placeholder = e.target.value
+                                setServiceFormFields(newFields)
+                              }}
+                              placeholder="e.g. Enter your name"
+                              className="w-full bg-white border border-gray-100 rounded-xl px-4 py-3 outline-none focus:border-accent font-bold text-xs shadow-sm" 
+                            />
+                          </div>
+                        </div>
+
+                        {/* Options Editor for Dropdowns/Buttons */}
+                        {(field.type === 'select' || field.type === 'buttons') && (
+                          <div className="space-y-2 pt-2 border-t border-gray-100">
+                            <label className="text-[9px] font-bold text-gray-400 uppercase block">Options (Comma separated)</label>
+                            <input 
+                              value={field.options?.join(', ') || ''}
+                              onChange={(e) => {
+                                const newFields = [...serviceFormFields]
+                                newFields[index].options = e.target.value.split(',').map(s => s.trim()).filter(s => s !== '')
+                                setServiceFormFields(newFields)
+                              }}
+                              placeholder="e.g. 1BHK, 2BHK, 3BHK"
+                              className="w-full bg-white border border-gray-100 rounded-xl px-4 py-3 outline-none focus:border-accent font-bold text-xs shadow-sm" 
+                            />
+                            <p className="text-[9px] text-gray-400 italic">Separate each option with a comma.</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {modalType !== 'form_config' && (
+                <div className="space-y-2">
                 <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">
                   {modalType === 'testimonial' ? 'Review / Testimonial' : 'Description'}
                 </label>
@@ -949,7 +1254,8 @@ const Admin = () => {
                   rows="4" 
                   className="w-full bg-secondary/50 border border-gray-100 rounded-xl px-4 py-3 outline-none focus:border-accent font-bold text-sm resize-none"
                 ></textarea>
-              </div>
+                </div>
+              )}
 
               <div className="flex gap-4 pt-4 sticky bottom-0 bg-white py-4 border-t border-gray-100">
                 <button type="submit" disabled={isSubmitting} className="flex-grow bg-text-dark text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-accent transition-all duration-500 flex items-center justify-center gap-3 shadow-xl disabled:opacity-50">
