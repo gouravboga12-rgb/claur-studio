@@ -2,6 +2,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Maximize2, X } from 'lucide-react'
 import { useState, useMemo, useEffect } from 'react'
 import { useData } from '../hooks/useData'
+import SEO from '../components/SEO'
 
 const ProjectDetail = () => {
   const { id } = useParams()
@@ -76,6 +77,12 @@ const ProjectDetail = () => {
 
   return (
     <div className="pt-24 md:pt-32 bg-white">
+      <SEO 
+        title={`${project.title} | Portfolio Showcase`}
+        description={project.description ? (project.description.length > 155 ? project.description.slice(0, 152) + '...' : project.description) : `Detail view of the completed Claur Studio project: ${project.title}.`}
+        keywords={`${project.title}, ${project.category} Design Hyderabad, Claur Studio Project, Premium Home Interiors, Modern Interior Designers`}
+        ogImage={project.cover_image || project.coverImage}
+      />
       {/* Header */}
       <section className="bg-secondary py-16 md:py-24 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] select-none pointer-events-none font-black text-[30vw] leading-none uppercase">

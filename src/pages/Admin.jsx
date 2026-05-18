@@ -696,6 +696,59 @@ const Admin = () => {
                 ></textarea>
               </div>
 
+              {/* Divider */}
+              <div className="w-full h-px bg-gray-100 my-10"></div>
+
+              {/* SEO & Google Integrations */}
+              <h3 className="text-2xl font-black text-text-dark flex items-center gap-4 mb-8">
+                <Settings className="text-accent" />
+                SEO & Google Integrations
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                  { key: 'google_site_verification', label: 'Google Search Console Verification Key', icon: <Lock />, placeholder: 'e.g. google-site-verification=xxxx' },
+                  { key: 'google_analytics_id', label: 'Google Analytics 4 (GA4) Tracking ID', icon: <Database />, placeholder: 'e.g. G-XXXXXX' },
+                  { key: 'seo_global_keywords', label: 'Global Fallback SEO Keywords', icon: <Settings />, placeholder: 'comma separated keywords' },
+                ].map((field) => (
+                  <div key={field.key} className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">{field.label}</label>
+                    <div className="flex gap-2">
+                      <div className="relative flex-grow">
+                        <input 
+                          disabled={!isSettingsEditable}
+                          value={isSettingsEditable ? (tempSettings[field.key] || '') : (settings[field.key] || '')}
+                          onChange={(e) => setTempSettings({...tempSettings, [field.key]: e.target.value})}
+                          placeholder={field.placeholder}
+                          className={`w-full border rounded-xl pl-12 pr-4 py-3 outline-none transition-all font-bold text-sm ${
+                            isSettingsEditable 
+                              ? 'bg-white border-accent/20 focus:border-accent' 
+                              : 'bg-secondary/50 border-gray-100 cursor-not-allowed text-gray-400'
+                          }`} 
+                        />
+                        <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${isSettingsEditable ? 'text-accent' : 'text-gray-300'}`}>
+                          {field.icon}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-10 space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Global Fallback SEO Description</label>
+                <textarea 
+                  disabled={!isSettingsEditable}
+                  value={isSettingsEditable ? (tempSettings.seo_global_description || '') : (settings.seo_global_description || '')}
+                  onChange={(e) => setTempSettings({...tempSettings, seo_global_description: e.target.value})}
+                  placeholder="A premium interior design studio specializing in..."
+                  rows="3"
+                  className={`w-full border rounded-2xl px-6 py-4 outline-none transition-all font-bold text-sm resize-none ${
+                    isSettingsEditable 
+                      ? 'bg-white border-accent/20 focus:border-accent' 
+                      : 'bg-secondary/50 border-gray-100 cursor-not-allowed text-gray-400'
+                  }`}
+                ></textarea>
+              </div>
+
               {isSettingsEditable && (
                 <div className="mt-12 flex justify-end">
                   <button 

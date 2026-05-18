@@ -1,8 +1,14 @@
 import ServicesContent from '../components/ServicesContent'
+import SEO from '../components/SEO'
 
 const Services = () => {
   return (
     <div className="pt-24 md:pt-32">
+      <SEO 
+        title="Our Services | Modern Home & Commercial Design"
+        description="Explore premium interior design services by Claur Studio. Custom solutions for 2BHK/3BHK apartments, luxury villas, modular kitchens, and custom wardrobes in Hyderabad."
+        keywords="Interior Design Services Hyderabad, Modular Kitchen Hyderabad, 2BHK Interior Design Hyderabad, Custom Wardrobe Design, Living Room Interior Design, Claur Studio Services"
+      />
       <section className="bg-text-dark text-white py-20 md:py-32 lg:py-48 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full opacity-[0.05] select-none pointer-events-none font-black text-[40vw] md:text-[30vw] leading-none uppercase text-right">
           Expertise

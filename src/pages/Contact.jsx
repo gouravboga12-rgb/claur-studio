@@ -1,8 +1,14 @@
 import ContactContent from '../components/ContactContent'
+import SEO from '../components/SEO'
 
 const Contact = () => {
   return (
     <div className="pt-24 md:pt-32">
+      <SEO 
+        title="Contact Us | Book Free Design Consultation"
+        description="Get in touch with Claur Studio for a free design consultation. Tell us about your home design dreams, and receive a customized quote with no hidden charges."
+        keywords="Contact Claur Studio, Book Interior Designer Hyderabad, Free Consultation, Hire Home Decorators, Claur Studio Phone Number"
+      />
       <section className="bg-text-dark text-white py-20 md:py-24 lg:py-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full opacity-[0.05] select-none pointer-events-none font-black text-[30vw] md:text-[20vw] leading-none uppercase text-right">
           Inquiry

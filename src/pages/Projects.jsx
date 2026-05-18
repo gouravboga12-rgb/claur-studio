@@ -1,8 +1,14 @@
 import ProjectsContent from '../components/ProjectsContent'
+import SEO from '../components/SEO'
 
 const Projects = () => {
   return (
     <div className="pt-24 md:pt-32">
+      <SEO 
+        title="Our Portfolio | Completed Design Projects"
+        description="Browse through the luxury interior design projects completed by Claur Studio. Witness outstanding transformations of homes, villas, and modern kitchens in Hyderabad."
+        keywords="Interior Design Portfolio Hyderabad, Completed Home Interiors, Luxury Villa Designs, Modern Apartment Design Portfolio, Claur Studio Projects"
+      />
       <section className="bg-secondary py-20 md:py-32 lg:py-48 text-center relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] select-none pointer-events-none font-black text-[40vw] md:text-[30vw] leading-none uppercase">
           Gallery

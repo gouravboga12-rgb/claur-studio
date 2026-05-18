@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { ArrowLeft, Send, CheckCircle2 } from 'lucide-react'
 import { useData } from '../hooks/useData'
 import { supabase } from '../lib/supabase'
+import SEO from '../components/SEO'
 
 const ServiceInquiry = () => {
   const { serviceId } = useParams()
@@ -81,6 +82,11 @@ const ServiceInquiry = () => {
 
   return (
     <div className="pt-24 md:pt-32 min-h-screen bg-secondary/30">
+      <SEO 
+        title={`Inquire about ${service ? service.name : 'Service'}`}
+        description={`Submit a design inquiry for ${service ? (service.name + ' interiors') : 'interior services'} with Claur Studio. Custom luxury renovations and space design in Hyderabad.`}
+        keywords={`Inquire ${service ? service.name : 'Service'}, Premium Design Consultation, Claur Studio Services, Interior Design Hyderabad`}
+      />
       <div className="section-container py-12 md:py-20">
         <Link 
           to="/services" 

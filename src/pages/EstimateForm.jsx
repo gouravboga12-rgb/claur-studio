@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom'
 import { Send, CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useData } from '../hooks/useData'
+import SEO from '../components/SEO'
 
 const EstimateForm = () => {
   const { settings, loading } = useData()
@@ -107,6 +108,11 @@ const EstimateForm = () => {
 
   return (
     <div className="pt-28 md:pt-32 min-h-screen bg-[#FAF7F2]">
+      <SEO 
+        title={`Get Estimate for ${serviceLabel}`}
+        description={`Calculate cost estimate for ${serviceLabel} by Claur Studio. Custom options for living rooms, kitchens, bedrooms, and full villa design estimations.`}
+        keywords={`Interior Cost Calculation, Modular Kitchen Estimation Hyderabad, Wardrobe Cost Estimate, Claur Studio Calculator`}
+      />
       {/* Header */}
       <section className="bg-text-dark text-white py-12 md:py-16 relative overflow-hidden">
         <div className="section-container relative z-10">

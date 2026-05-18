@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+
+# Sitemap link
+Sitemap: https://claurstudio.com/sitemap.xml

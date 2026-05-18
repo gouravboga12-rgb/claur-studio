@@ -3,11 +3,17 @@ import WhyChooseUs from '../components/WhyChooseUs'
 import Process from '../components/Process'
 import FeaturedProjects from '../components/FeaturedProjects'
 import Testimonials from '../components/Testimonials'
+import SEO from '../components/SEO'
 
 const About = () => {
 
   return (
     <div className="pt-24 md:pt-32">
+      <SEO 
+        title="About Us | Architectural Precision & Artistic Flair"
+        description="Learn about Claur Studio, founded by Karan Dadga and Mounica. Discover our philosophy of luxury, functionality, and architectural excellence in home interiors."
+        keywords="Claur Studio Founders, Karan Dadga Interior Designer, Luxury Home Interiors Hyderabad, Modern Interior Designers Hyderabad, Premium Interior Design Studio"
+      />
       {/* Premium Header */}
       <section className="bg-secondary py-20 md:py-32 lg:py-48 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] select-none pointer-events-none font-black text-[40vw] md:text-[30vw] leading-none uppercase">
