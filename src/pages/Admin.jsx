@@ -273,12 +273,6 @@ const Admin = () => {
     }
   }
 
-  const handleUpdateSetting = async (key, value) => {
-    const { error } = await supabase.from('settings').upsert({ key, value })
-    if (error) alert('Error updating setting: ' + error.message)
-    else fetchData()
-  }
-
   const handleSaveAllSettings = async () => {
     setIsSubmitting(true)
     try {

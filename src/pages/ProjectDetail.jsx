@@ -1,12 +1,11 @@
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, Maximize2, X } from 'lucide-react'
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useData } from '../hooks/useData'
 import SEO from '../components/SEO'
 
 const ProjectDetail = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
   const { projects: allProjects } = useData()
   const [selectedImage, setSelectedImage] = useState(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)

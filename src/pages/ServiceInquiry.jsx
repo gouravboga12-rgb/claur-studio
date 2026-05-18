@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ArrowLeft, Send, CheckCircle2 } from 'lucide-react'
 import { useData } from '../hooks/useData'
 import { supabase } from '../lib/supabase'

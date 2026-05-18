@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { Send, CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react'
+import { CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useData } from '../hooks/useData'
 import SEO from '../components/SEO'
